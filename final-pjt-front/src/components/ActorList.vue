@@ -8,6 +8,7 @@
 <script>
 import ActorListItem from '@/components/ActorListItem.vue'
 export default {
+  name: 'ActorList',
   components: {
     ActorListItem,
   }

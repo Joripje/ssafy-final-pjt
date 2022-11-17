@@ -42,7 +42,7 @@ const routes = [
     component: WatchLaterView
   },
   {
-    path: '/movieitemdetail',
+    path: '/movieitemdetail/:movieId',
     name: 'movieitemdetail',
     component: MovieItemDetailView
   },

@@ -8,6 +8,7 @@
 <script>
 import MovieList from '@/components/MovieList.vue'
 export default {
+  name: 'SearchView',
   components: {
     MovieList,
   }

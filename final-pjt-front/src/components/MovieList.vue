@@ -1,15 +1,24 @@
 <template>
   <div>
-    <h1>영화 리스트입니다</h1>
-    <MovieListItem/>
+    <MovieListItem
+      v-for="(movie, index) in movies"
+      :key="index"
+      :movie="movie"
+    />
   </div>
 </template>
 
 <script>
 import MovieListItem from '@/components/MovieListItem.vue'
 export default {
+  name: 'MovieList',
   components: {
     MovieListItem,
+  },
+  computed: {
+    movies() {
+      return this.$store.state.movieDetail
+    }
   }
 }
 </script>
