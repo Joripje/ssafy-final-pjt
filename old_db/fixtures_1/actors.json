@@ -380,7 +380,7 @@
 		"pk": 112,
 		"fields": {
 			"name": "케이트 블란쳇",
-			"profile_path": "/vUuEHiAR0eD3XEJhg2DWIjymUAA.jpg"
+			"profile_path": "/vq4vuAVhYngfzVNn8SbnG0JEy15.jpg"
 		}
 	},
 	{
@@ -724,7 +724,7 @@
 		"pk": 287,
 		"fields": {
 			"name": "브래드 피트",
-			"profile_path": "/ajNaPmXVVMJFg9GWmu6MJzTaXdV.jpg"
+			"profile_path": "/3UmLRKzI9fXONhyad2wdQ3JAKDO.jpg"
 		}
 	},
 	{
@@ -1044,7 +1044,7 @@
 		"pk": 8655,
 		"fields": {
 			"name": "R. Lee Ermey",
-			"profile_path": "/aXFJlEGHlQT7bwxkKwq6Sx7PeEp.jpg"
+			"profile_path": "/vOX3JHPLrKn2HJoPNguKcTN8Lk0.jpg"
 		}
 	},
 	{
@@ -5393,6 +5393,14 @@
 	},
 	{
 		"model": "movies.actor",
+		"pk": 232499,
+		"fields": {
+			"name": "Harry Shum Jr.",
+			"profile_path": "/vtKeIKJHQAnGsjbFuXrBQI3RxeQ.jpg"
+		}
+	},
+	{
+		"model": "movies.actor",
 		"pk": 11315,
 		"fields": {
 			"name": "Noah Emmerich",
@@ -5413,14 +5421,6 @@
 		"fields": {
 			"name": "Holland Taylor",
 			"profile_path": "/jt9yFB3nLfZQ0c1DcnvvcfA11gB.jpg"
-		}
-	},
-	{
-		"model": "movies.actor",
-		"pk": 232499,
-		"fields": {
-			"name": "Harry Shum Jr.",
-			"profile_path": "/vtKeIKJHQAnGsjbFuXrBQI3RxeQ.jpg"
 		}
 	},
 	{
@@ -8684,7 +8684,7 @@
 		"pk": 13361,
 		"fields": {
 			"name": "Edwin Maxwell",
-			"profile_path": "/k31nSbkIkSqWelDQyWvn5zF1g9q.jpg"
+			"profile_path": "/2xwVbDRoDsuykeEsn7BBXRLT2Bp.jpg"
 		}
 	},
 	{
