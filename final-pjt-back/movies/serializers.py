@@ -3,6 +3,13 @@ from .models import *
 from django.contrib.auth import get_user_model
 
 
+# class MovieListSerializer(serializers.ModelSerializer):
+
+#     class Meta:
+#         models = Movie
+#         fields = '__all__'
+
+
 class MovieSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -14,7 +21,7 @@ class GenreNameSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Genre
-        fields = ('__all__')
+        fields = '__all__'
 
 
 class MovieGenreSerializer(serializers.ModelSerializer):

@@ -13,6 +13,7 @@ def movie_detail(request, pk):
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_genre(request, pk):
     movie =  Movie.objects.get(pk=pk)
@@ -20,10 +21,19 @@ def get_genre(request, pk):
 
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_actors(request, pk):
     movie = Movie.objects.get(pk=pk)
     serializer = MovieActorSerializer(movie)
+
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_movielist(request):
+    movie = Movie.objects.all()
+    serializer = MovieSerializer(movie, many=True)
 
     return Response(serializer.data)
 

@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:pk>/add_wishlist/', views.add_wishlist),
     path('<int:pk>/genre/', views.get_genre),
     path('<int:pk>/actors/', views.get_actors),
+    path('movie_list/', views.get_movielist),
 ]
