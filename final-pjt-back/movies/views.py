@@ -38,17 +38,25 @@ def get_movielist(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
-def add_wishlist(request, pk):
-    print(123123123)
-    movie = Movie.objects.get(pk=pk)
-    print(movie)
-    user = request.user
-    print(user)
-    if movie.wish_user.filter(pk=2).exists():
-        movie.wish_user.remove(user)
-    else:
-        movie.wish_user.add(user)
-    serializer = WishMovieSerializer(movie)
+@api_view(['GET'])
+def get_actorlist(request):
+    actor = Actor.objects.all()
+    serializer = ActorSerializer(actor, many=True)
 
     return Response(serializer.data)
+
+
+# @api_view(['POST'])
+# def add_wishlist(request, pk):
+#     print(123123123)
+#     movie = Movie.objects.get(pk=pk)
+#     print(movie)
+#     user = request.user
+#     print(user)
+#     if movie.wish_user.filter(pk=2).exists():
+#         movie.wish_user.remove(2)
+#     else:
+#         movie.wish_user.add(2)
+#     serializer = WishMovieSerializer(movie)
+
+#     return Response(serializer.data)
