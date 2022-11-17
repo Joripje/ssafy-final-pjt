@@ -8,6 +8,7 @@
 <script>
 import ReviewListItem from '@/components/ReviewListItem.vue'
 export default {
+  name: 'ReviewList',
   components: {
     ReviewListItem,
   }

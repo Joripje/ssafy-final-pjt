@@ -10,6 +10,7 @@
 import RecommendMovie from '@/components/RecommendMovie.vue'
 import TrendingMovie from '@/components/TrendingMovie.vue'
 export default {
+  name: 'HomeView',
   components: { 
     RecommendMovie,
     TrendingMovie
