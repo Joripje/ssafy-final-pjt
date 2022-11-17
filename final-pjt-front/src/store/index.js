@@ -7,6 +7,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    movieItemDetail:[
+
+    ],
     movieDetail: [
       {
         "id": 11,
@@ -60,6 +63,9 @@ export default new Vuex.Store({
   getters: {
   },
   mutations: {
+    GET_ARTICLES(state, movieItemDetail) {
+      state.movieItemDetail = movieItemDetail
+    }
   },
   actions: {
     getMovieDetail(context, movieId) {
@@ -69,7 +75,7 @@ export default new Vuex.Store({
         url: `${API_URL}/api/v1/movies/${movieId}/`
       })
         .then(res =>
-          console.log(res, context)
+          context.commit('GET_ARTICLES', res.data)
         )
         .catch(err => console.log(err))
     },

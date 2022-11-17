@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>영화 디테일 페이지입니다</h1>
-    <h1>{{}}</h1>
+    <img :src="movieItemDetailPoster">
+    <h1>{{movieItemDetail.title}}</h1>
     <!-- <h1 @click="addToWishlist">누르면 위시리스트에 추가</h1> -->
     <ActorList/>
     <ReviewList/>
@@ -27,6 +28,16 @@ export default {
     getMovieDetail() {
       this.$store.dispatch('getMovieDetail', this.$route.params.movieId)
     }
+  },
+  computed: {
+    movieItemDetail() {
+      return this.$store.state.movieItemDetail
+    },
+    movieItemDetailPoster() {
+      const BASE_URL = 'https://image.tmdb.org/t/p/w500'
+      const poster_path = this.movieItemDetail.poster_path
+      return BASE_URL + poster_path
+    },
   }
 }
 </script>
