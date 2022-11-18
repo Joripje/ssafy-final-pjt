@@ -10,6 +10,9 @@ export default new Vuex.Store({
     movieItemDetail:[
 
     ],
+    actors: [
+
+    ],
     movieDetail: [
       {
         "id": 11,
@@ -63,22 +66,36 @@ export default new Vuex.Store({
   getters: {
   },
   mutations: {
-    GET_ARTICLES(state, movieItemDetail) {
+    GET_MOVIE_DETAIL(state, movieItemDetail) {
       state.movieItemDetail = movieItemDetail
+    },
+    GET_ACTORS_WITH_MOVIE_ID(state, actors) {
+      state.actors = actors
     }
   },
   actions: {
     getMovieDetail(context, movieId) {
-      console.log(movieId)
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/movies/${movieId}/`
       })
         .then(res =>
-          context.commit('GET_ARTICLES', res.data)
+          context.commit('GET_MOVIE_DETAIL', res.data)
+          // console.log(res.data)
         )
         .catch(err => console.log(err))
     },
+    getActorsWithMovieId(context, movieId) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movies/${movieId}/actors/`
+      })
+        .then(res => 
+          context.commit('GET_ACTORS_WITH_MOVIE_ID', res.data) 
+          // console.log(res) 
+        )
+        .catch(err => console.log(err))
+    }
   },
   modules: {
   }
