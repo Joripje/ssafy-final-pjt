@@ -21,13 +21,14 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     genres = models.ManyToManyField(Genre, related_name='genre_movie')
     actors = models.ManyToManyField(Actor, related_name='actor_movie')
-    wish_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='wish_movie', blank=True)
+    wish_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='wish_movie', blank=True)  # 해당 영화를 위시리스트에 추가한 사람들
 
 
 class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    rate = models.IntegerField()
-    content = models.TextField()
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # 작성자
+    rate = models.IntegerField()  # 평점
+    content = models.TextField(blank=True, null=True)  # 내용, 안적어도 됨
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+    like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_review', blank=True)  # 해당 리뷰를 좋아하는 사람들
