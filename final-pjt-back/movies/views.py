@@ -86,3 +86,21 @@ def add_wishlist(request, movie_pk):
     serializer = LikeReviewSerializer(movie)
 
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def actor_detail(request, actor_pk):
+    actor = Actor.objects.get(pk=actor_pk)
+    serializer = ActorMovieSerializer(actor)
+
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def review(request, movie_pk):
+    movie = Movie.objects.get(pk=movie_pk)
+    serializer = MovieReviewSerializer(movie)
+
+    return Response(serializer.data)
+
+

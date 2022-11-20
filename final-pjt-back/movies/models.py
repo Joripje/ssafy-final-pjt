@@ -25,8 +25,8 @@ class Movie(models.Model):
 
 
 class Review(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # 작성자
+    movie = models.ForeignKey(Movie, related_name='movie_review', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='review_user', on_delete=models.CASCADE)  # 작성자
     rate = models.IntegerField()  # 평점
     content = models.TextField(blank=True, null=True)  # 내용, 안적어도 됨
     created_date = models.DateTimeField(auto_now_add=True)
