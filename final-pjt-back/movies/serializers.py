@@ -52,10 +52,32 @@ class WishMovieSerializer(serializers.ModelSerializer):
     class UserSerializer(serializers.ModelSerializer):
         class Meta:
             model = get_user_model()
-            fields = '__all__'
+            fields = ('id', 'username',)
 
     wish_user = UserSerializer(many=True, read_only=True)
 
     class Meta:
         model = Movie
-        fields ='__all__'
+        fields = ('id', 'wish_user')
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Review
+        fields = '__all__'
+        read_only_fields = ('movie', 'user',)
+
+
+class LikeReviewSerializer(serializers.ModelSerializer):
+
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = get_user_model()
+            fields = ('id', 'username',)
+    
+    like_user = UserSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Review
+        fields = ('id', 'like_user')
