@@ -1,12 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import createPersistedState from 'vuex-persistedstate'
 
 const API_URL = 'http://127.0.0.1:8000'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [
+    createPersistedState(),
+  ],
   state: {
+    token: null,
     wishlist: [
 
     ],
@@ -65,6 +70,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    // isLoggedIn(state) {
+    //   return state.isLoggedIn ? "True" : "False"
+    // }
   },
   mutations: {
     GET_MOVIE_DETAIL(state, movieItemDetail) {
@@ -78,6 +86,9 @@ export default new Vuex.Store({
     },
     ADD_TO_WISH_LIST(state, movieId) {
       state.wishlist.push(movieId)
+    },
+    SAVE_TOKEN(state, token) {
+      state.token = token
     }
   },
   actions: {
@@ -116,6 +127,37 @@ export default new Vuex.Store({
     },
     addToWishList(context, movieId) {
       context.commit('ADD_TO_WISH_LIST', movieId)
+    },
+    signUp(context, payload) {
+      const username = payload.username
+      const password1 = payload.password1
+      const password2 = payload.password2
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v1/accounts/signup/`,
+        data: {
+          username, password1, password2
+        }
+      })
+        .then(res => {
+          context.commit('SAVE_TOKEN', res.data.key)
+        })
+        .catch(err => console.log(err))
+    },
+    logIn(context, payload) {
+      const username = payload.username
+      const password = payload.password
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v1/accounts/login/`,
+        data: {
+          username, password
+        }
+      })
+        .then(res => {
+          context.commit('SAVE_TOKEN', res.data.key)
+        })
+        .catch(err => console.log(err))
     }
   },
   modules: {

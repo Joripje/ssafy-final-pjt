@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <nav>
+      <!-- 로그인 상태일때는 로그아웃 라우터 링크가 표시되도록 작성 -->
       <router-link to="/">Home</router-link> |
       <router-link to="/SignUp">SignUp</router-link> |
       <router-link to="/LogIn">LogIn</router-link> |

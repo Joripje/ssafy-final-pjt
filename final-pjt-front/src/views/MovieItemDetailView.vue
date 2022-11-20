@@ -4,7 +4,7 @@
     <button @click="addToWishList">위시리스트 추가</button>
     <img :src="movieItemDetailPoster">
     <h1>{{ movieItemDetail.title }}</h1>
-    <li v-for="genre in genres" :key="genre">{{genre.name}}</li>
+    <li v-for="(genre, idx) in genres" :key="idx">{{genre.name}}</li>
     <ActorList/>
     <ReviewList/>
   </div>
