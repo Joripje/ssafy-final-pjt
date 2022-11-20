@@ -7,10 +7,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    wishlist: [
+
+    ],
     movieItemDetail:[
 
     ],
     actors: [
+
+    ],
+    genres: [
 
     ],
     movieDetail: [
@@ -56,11 +62,6 @@ export default new Vuex.Store({
     userDetail: {
       "username": "이승희",
       "user_image": "https://edu.ssafy.com/asset/images/header-logo.jpg",
-      "wish_list" : [
-        1,
-        2,
-        3,
-      ]
     }
   },
   getters: {
@@ -71,6 +72,12 @@ export default new Vuex.Store({
     },
     GET_ACTORS_WITH_MOVIE_ID(state, actors) {
       state.actors = actors
+    },
+    GET_MOVIE_GENRE(state, genres) {
+      state.genres = genres
+    },
+    ADD_TO_WISH_LIST(state, movieId) {
+      state.wishlist.push(movieId)
     }
   },
   actions: {
@@ -95,6 +102,20 @@ export default new Vuex.Store({
           // console.log(res) 
         )
         .catch(err => console.log(err))
+    },
+    getMovieGenre(context, movieId) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movies/${movieId}/genre/`
+      })
+        .then(res => 
+          context.commit('GET_MOVIE_GENRE', res.data) 
+          // console.log(res) 
+        )
+        .catch(err => console.log(err))
+    },
+    addToWishList(context, movieId) {
+      context.commit('ADD_TO_WISH_LIST', movieId)
     }
   },
   modules: {
