@@ -1,12 +1,11 @@
 <template>
   <div>
     <h1>출연배우</h1>
-    <!-- <ActorListItem
+    <ActorListItem
       v-for="(actor, id) in actors"
       :key="id"
       :actor="actor"
-    /> -->
-    <h1>{{ actors }}</h1>
+    />
     <ActorListItem/>
   </div>
 </template>
@@ -28,15 +27,8 @@ export default {
     },
   },
   computed: {
-    
-    // movieItemDetailPoster() {
-    //   const BASE_URL = 'https://image.tmdb.org/t/p/w500'
-    //   const poster_path = this.movieItemDetail.poster_path
-    //   return BASE_URL + poster_path
-    // },
     actors() {
-      console.log(this.$store.state.actors)
-      return this.$store.state.actors
+      return this.$store.state.actors.actors
     }
   }
 }

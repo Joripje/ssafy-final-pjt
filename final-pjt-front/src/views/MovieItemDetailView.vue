@@ -1,8 +1,10 @@
 <template>
   <div>
     <h1>영화 디테일 페이지입니다</h1>
+    <button @click="addToWishList">위시리스트 추가</button>
     <img :src="movieItemDetailPoster">
-    <h1>{{movieItemDetail.title}}</h1>
+    <h1>{{ movieItemDetail.title }}</h1>
+    <li v-for="genre in genres" :key="genre">{{genre.name}}</li>
     <ActorList/>
     <ReviewList/>
   </div>
@@ -19,11 +21,18 @@ export default {
   },
   created() {
     this.getMovieDetail()
+    this.getMovieGenre()
   },
   methods: {
     getMovieDetail() {
       this.$store.dispatch('getMovieDetail', this.$route.params.movieId)
     },
+    getMovieGenre() {
+      this.$store.dispatch('getMovieGenre', this.$route.params.movieId)
+    },
+    addToWishList() {
+      this.$store.dispatch('addToWishList', this.$route.params.movieId)
+    }
   },
   computed: {
     movieItemDetail() {
@@ -34,6 +43,9 @@ export default {
       const poster_path = this.movieItemDetail.poster_path
       return BASE_URL + poster_path
     },
+    genres() {
+      return this.$store.state.genres.genres
+    }
   }
 }
 </script>
