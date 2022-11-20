@@ -9,7 +9,7 @@
 export default {
   name: 'ActorListItem',
   props: {
-    actor: Array,
+    actor: Object,
   },
   computed: {
     actorProfile() {
