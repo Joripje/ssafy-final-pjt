@@ -81,3 +81,28 @@ class LikeReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'like_user')
+
+
+# 배우의 출연작
+class ActorMovieSerializer(serializers.ModelSerializer):
+
+    class MovieListSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Movie
+            fields = ('id', 'title', 'poster_path')
+
+    actor_movie = MovieListSerializer(many=True)
+
+    class Meta:
+        model = Actor
+        fields = '__all__'
+
+
+# 영화에 연결된 리뷰
+class MovieReviewSerializer(serializers.ModelSerializer):
+
+    movie_review = ReviewSerializer(many=True)
+
+    class Meta:
+        model = Movie
+        fields = ('id', 'title', 'movie_review',)
