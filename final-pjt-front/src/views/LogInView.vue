@@ -22,6 +22,9 @@ export default {
       password: null,
     }
   },
+  created() {
+    this.getUserInfo()
+  },
   methods: {
     logIn() {
       const username = this.username
@@ -30,8 +33,11 @@ export default {
         username, password
       }
       this.$store.dispatch('logIn', payload)
+    },
+    getUserInfo() {
+      this.$store.dispatch('getUserInfo')
     }
-  }
+  },
 
 }
 </script>

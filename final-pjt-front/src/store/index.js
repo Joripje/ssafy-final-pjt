@@ -70,9 +70,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    // isLoggedIn(state) {
-    //   return state.isLoggedIn ? "True" : "False"
-    // }
+    isLoggedIn(state) {
+      return state.token ? true : false
+    }
   },
   mutations: {
     GET_MOVIE_DETAIL(state, movieItemDetail) {
@@ -89,6 +89,9 @@ export default new Vuex.Store({
     },
     SAVE_TOKEN(state, token) {
       state.token = token
+    },
+    GET_USER_INFO(userInfo) {
+      console.log(userInfo)
     }
   },
   actions: {
@@ -141,6 +144,7 @@ export default new Vuex.Store({
       })
         .then(res => {
           context.commit('SAVE_TOKEN', res.data.key)
+
         })
         .catch(err => console.log(err))
     },
@@ -158,6 +162,21 @@ export default new Vuex.Store({
           context.commit('SAVE_TOKEN', res.data.key)
         })
         .catch(err => console.log(err))
+    },
+    getUserInfo(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/accounts/user`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        }
+      })
+        .then((res) => {
+          context.commit('GET_USER_INFO', res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   },
   modules: {

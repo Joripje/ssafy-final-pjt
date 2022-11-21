@@ -6,7 +6,6 @@
       :key="id"
       :actor="actor"
     />
-    <ActorListItem/>
   </div>
 </template>
 
