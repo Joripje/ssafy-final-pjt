@@ -15,7 +15,7 @@ export default new Vuex.Store({
     user_info: [
 
     ],
-    wishlist: [
+    movie_review: [
 
     ],
     movieItemDetail:[
@@ -83,9 +83,6 @@ export default new Vuex.Store({
     GET_MOVIE_GENRE(state, genres) {
       state.genres = genres
     },
-    ADD_TO_WISH_LIST(state, movieId) {
-      state.wishlist.push(movieId)
-    },
     SAVE_TOKEN(state, token) {
       state.token = token
     },
@@ -95,6 +92,9 @@ export default new Vuex.Store({
     LOG_OUT(state) {
       state.token = null
       state.user_info = null
+    },
+    GET_MOVIE_REVIEW(state, movie_review) {
+      state.movie_review = movie_review
     }
   },
   actions: {
@@ -129,7 +129,17 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
     },
     addToWishList(context, movieId) {
-      context.commit('ADD_TO_WISH_LIST', movieId)
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v1/movies/${movieId}/add_wishlist/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`
+        }
+      })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => console.log(err))
     },
     signUp(context, payload) {
       const username = payload.username
@@ -187,6 +197,44 @@ export default new Vuex.Store({
         .then((res)=> {
           console.log(res.detail)
           context.commit('LOG_OUT')
+        })
+    },
+    createReview(context, payload) {
+      const content = payload.review_content
+      const rate = payload.review_rate
+      const movieId = payload.movieId
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v1/movies/${movieId}/create_review/`,
+        data: {
+          content, rate
+        },
+        headers: {
+          Authorization: `Token ${this.state.token}`
+        }
+      })
+        .then(res => {
+          console.log(res)
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getMovieReview(context, movieId) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movies/${movieId}/review/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`
+        }
+      })
+        .then(res => {
+          context.commit('GET_MOVIE_REVIEW', res.data.movie_review)
+
+        })
+        .catch(err => {
+          console.log(err)
         })
     }
     
