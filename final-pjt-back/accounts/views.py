@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from movies.models import *
@@ -10,15 +11,17 @@ from collections import OrderedDict
 # Create your views here.
 
 @api_view(['GET'])
-def profile(request, user_pk):
-    user = get_object_or_404(get_user_model(), pk=user_pk)
+@permission_classes([IsAuthenticated])
+def profile(request):
+    user = request.user
     serializer = ProfileSerializer(user)
 
     return Response(serializer.data)
 
 # 장르 선호도
 @api_view(['GET'])
-def genre_prefer(request, user_pk):
+@permission_classes([IsAuthenticated])
+def genre_prefer(request):
     prefer_dict = {
         12: 0,
         14: 0,
@@ -40,7 +43,7 @@ def genre_prefer(request, user_pk):
         10752: 0,
         10770: 0,
     }
-    user = get_object_or_404(get_user_model(), pk=user_pk)
+    user = request.user
 
     serializer = PreferGenreSerializer(user)
     genres = serializer.data['review_user']

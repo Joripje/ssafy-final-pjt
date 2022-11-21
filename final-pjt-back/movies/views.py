@@ -1,7 +1,9 @@
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 
 from .models import *
 from .serializers import *
@@ -96,6 +98,7 @@ def actor_detail(request, actor_pk):
     return Response(serializer.data)
 
 
+# 리뷰 조회
 @api_view(['GET'])
 def review(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
@@ -103,4 +106,29 @@ def review(request, movie_pk):
 
     return Response(serializer.data)
 
+# 개별 리뷰 조회, 수정, 삭제
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def rud_review(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.method == 'GET':
+        # review = Review.objects.get(pk=review_pk)
+        serializer = ReviewSerializer(review)
 
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        if review.user == request.user:
+            serializer = ReviewSerializer(review, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response('작성자가 아닙니다.')
+
+    elif request.method == 'DELETE':
+        if review.user == request.user:
+            review.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response('작성자가 아닙니다.')
