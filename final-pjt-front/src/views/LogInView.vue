@@ -14,16 +14,15 @@
 </template>
 
 <script>
+
 export default {
   name: 'LogInView',
   data() {
     return {
       username: null,
       password: null,
+      user_info: null,
     }
-  },
-  created() {
-    this.getUserInfo()
   },
   methods: {
     logIn() {
@@ -33,10 +32,8 @@ export default {
         username, password
       }
       this.$store.dispatch('logIn', payload)
+      this.$router.push({ name: 'home'})
     },
-    getUserInfo() {
-      this.$store.dispatch('getUserInfo')
-    }
   },
 
 }

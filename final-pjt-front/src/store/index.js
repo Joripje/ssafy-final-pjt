@@ -12,6 +12,9 @@ export default new Vuex.Store({
   ],
   state: {
     token: null,
+    user_info: [
+
+    ],
     wishlist: [
 
     ],
@@ -64,10 +67,6 @@ export default new Vuex.Store({
         ]
       }
     ],
-    userDetail: {
-      "username": "이승희",
-      "user_image": "https://edu.ssafy.com/asset/images/header-logo.jpg",
-    }
   },
   getters: {
     isLoggedIn(state) {
@@ -90,8 +89,12 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
     },
-    GET_USER_INFO(userInfo) {
-      console.log(userInfo)
+    GET_USER_INFO(state, userInfo) {
+      state.user_info = userInfo
+    },
+    LOG_OUT(state) {
+      state.token = null
+      state.user_info = null
     }
   },
   actions: {
@@ -102,7 +105,6 @@ export default new Vuex.Store({
       })
         .then(res =>
           context.commit('GET_MOVIE_DETAIL', res.data)
-          // console.log(res.data)
         )
         .catch(err => console.log(err))
     },
@@ -113,7 +115,6 @@ export default new Vuex.Store({
       })
         .then(res => 
           context.commit('GET_ACTORS_WITH_MOVIE_ID', res.data) 
-          // console.log(res) 
         )
         .catch(err => console.log(err))
     },
@@ -124,7 +125,6 @@ export default new Vuex.Store({
       })
         .then(res => 
           context.commit('GET_MOVIE_GENRE', res.data) 
-          // console.log(res) 
         )
         .catch(err => console.log(err))
     },
@@ -160,24 +160,36 @@ export default new Vuex.Store({
       })
         .then(res => {
           context.commit('SAVE_TOKEN', res.data.key)
+          axios({
+            method: 'get',
+            url: `${API_URL}/api/v1/accounts/user/`,
+            headers: {
+              Authorization: `Token ${this.state.token}`
+            }
+          })
+            .then((res) => {
+                context.commit('GET_USER_INFO', res.data)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
         })
         .catch(err => console.log(err))
     },
-    getUserInfo(context) {
+    logOut(context) {
       axios({
-        method: 'get',
-        url: `${API_URL}/api/v1/accounts/user`,
+        method: 'post',
+        url: `${API_URL}/api/v1/accounts/logout/`,
         headers: {
-          Authorization: `Token ${this.$store.state.token}`
+          Authorization: `Token ${this.state.token}`
         }
       })
-        .then((res) => {
-          context.commit('GET_USER_INFO', res)
-        })
-        .catch((err) => {
-          console.log(err)
+        .then((res)=> {
+          console.log(res.detail)
+          context.commit('LOG_OUT')
         })
     }
+    
   },
   modules: {
   }

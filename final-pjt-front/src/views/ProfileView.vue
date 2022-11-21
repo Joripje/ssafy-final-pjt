@@ -1,8 +1,8 @@
 <template>
   <div>
     <router-link to="/watchlater">WatchLater</router-link>
-    <h1>{{ userDetail.username }}</h1>
-    <img :src="userImage">
+    <!-- <h1>{{ userDetail.username }}</h1> -->
+    <!-- <img :src="userImage"> -->
     <h1></h1>
     <PreferenceUser/>
     <ReviewList/>
@@ -19,14 +19,14 @@ export default {
     PreferenceUser,
     ReviewList,
   },
-  computed: {
-    userDetail() {
-      return this.$store.state.userDetail
-    },
-    userImage() {
-      return this.$store.state.userDetail.user_image
-    }
-  }
+  // computed: {
+  //   userDetail() {
+  //     return this.$store.state.userDetail
+  //   },
+  //   userImage() {
+  //     return this.$store.state.userDetail.user_image
+  //   }
+  // }
 }
 </script>
 
