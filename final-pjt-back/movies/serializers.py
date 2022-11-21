@@ -65,11 +65,16 @@ class WishMovieSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
 
     like_user_count = serializers.IntegerField(source='like_user.count', read_only=True)
+    user = serializers.CharField(source="user.username", read_only=True)
 
     class Meta:
+        
         model = Review
         fields = '__all__'
         read_only_fields = ('movie', 'user',)
+        ordering = ['-like_user_count']
+
+    
 
 
 class LikeReviewSerializer(serializers.ModelSerializer):

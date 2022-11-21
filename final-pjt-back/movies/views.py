@@ -140,10 +140,10 @@ def actor_detail(request, actor_pk):
 def review(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
     # like_counts = Review.objects.annotate(like_user_count = Count('like_user', distinct=True))
-    print(movie)
+    # print(movie)
     serializer = MovieReviewSerializer(movie)
 
-    # serializer_data = sorted(serializer.data, key=lambda k: k['like_user_count'], reverse=True)
+    # print(serializer.data)
 
     return Response(serializer.data)
 
