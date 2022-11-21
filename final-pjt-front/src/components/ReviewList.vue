@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h1>리뷰 리스트입니다</h1>
-    <ReviewListItem/>
+    <ReviewListItem
+    v-for="(review, index) in reviews"
+    :key="index"
+    :review="review"
+    />
   </div>
 </template>
 
@@ -11,6 +14,11 @@ export default {
   name: 'ReviewList',
   components: {
     ReviewListItem,
+  },
+  computed: {
+    reviews() {
+      return this.$store.state.movie_review
+    }
   }
 }
 </script>
@@ -18,3 +26,5 @@ export default {
 <style>
 
 </style>
+
+

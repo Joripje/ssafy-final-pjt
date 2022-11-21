@@ -5,6 +5,17 @@
     <img :src="movieItemDetailPoster">
     <h1>{{ movieItemDetail.title }}</h1>
     <li v-for="(genre, idx) in genres" :key="idx">{{genre.name}}</li>
+    <h1>리뷰작성</h1>
+    <form>
+      <label for="review_content">내용</label>
+      <input type="text" v-model="review_content" id="review_content">
+      <br>
+      <label for="review_rate">점수</label>
+      <input type="number" v-model="review_rate" id="review_rate">
+      <button @click.prevent="createReview">작성하기</button>
+      
+    </form>
+    <h1>{{ review_content }} {{review_rate}}</h1>
     <ActorList/>
     <ReviewList/>
   </div>
@@ -15,6 +26,12 @@ import ReviewList from '@/components/ReviewList.vue'
 import ActorList from '@/components/ActorList.vue'
 export default {
   name: 'MovieItemDetailView',
+  data() {
+    return {
+      review_content: null,
+      review_rate: null,
+    }
+  },
   components: {
     ReviewList,
     ActorList,
@@ -22,6 +39,7 @@ export default {
   created() {
     this.getMovieDetail()
     this.getMovieGenre()
+    this.getMovieReview()
   },
   methods: {
     getMovieDetail() {
@@ -32,6 +50,22 @@ export default {
     },
     addToWishList() {
       this.$store.dispatch('addToWishList', this.$route.params.movieId)
+    },
+    createReview() {
+      const review_content = this.review_content
+      const review_rate = this.review_rate
+      const movieId = this.$route.params.movieId
+      const payload = {
+        review_content: review_content,
+        review_rate: review_rate,
+        movieId: movieId
+      }
+      this.$store.dispatch('createReview', payload)
+      this.review_content = null
+      this.review_rate = null
+    },
+    getMovieReview() {
+      this.$store.dispatch('getMovieReview', this.$route.params.movieId)
     }
   },
   computed: {
