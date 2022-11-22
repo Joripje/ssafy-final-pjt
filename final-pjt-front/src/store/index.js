@@ -4,9 +4,8 @@ import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 
 const API_URL = 'http://127.0.0.1:8000'
-const TMDB_API_KEY = process.env.TMDB_API_KEY
 Vue.use(Vuex)
-
+const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
 export default new Vuex.Store({
   plugins: [
     createPersistedState(),
@@ -29,6 +28,9 @@ export default new Vuex.Store({
 
     ],
     genres: [
+
+    ],
+    recommend_movie_list: [
 
     ],
   },
@@ -65,6 +67,9 @@ export default new Vuex.Store({
     },
     GET_MOVIE_LIST(state, movie_list) {
       state.movie_list = movie_list
+    },
+    GET_RECOMMEND_LIST(state, movie_list) {
+      state.recommend_movie_list = movie_list
     }
   },
   actions: {
@@ -222,6 +227,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          console.log(TMDB_API_KEY)
         })
     },
     getWishList(context) {
@@ -240,6 +246,28 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    getRecommendMovie(context) {
+      if (this.state.token) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/accounts/recommend/`,
+          headers: {
+            Authorization: `Token ${this.state.token}`
+          }
+        })
+          .then(res => {
+            res.data
+            context.commit('GET_RECOMMEND_LIST', res.data)
+            console.log(res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        console.log('없음')
+      }
+      
+    }
 
   },
   modules: {

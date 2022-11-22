@@ -201,9 +201,18 @@ def recommend(request):
         return ((v / (v + m)) * R) + ((m / (m + v)) * C)
 
     df['weighted_score'] = df.apply(weighted_score, axis=1)
-    recommand_df = df[1:].sort_values(by=['similarity', 'weighted_score'], ascending=False)
+    recommend_df = df[1:].sort_values(by=['similarity', 'weighted_score'], ascending=False)
 
     # recommand_df = df[1:].sort_values(by='similarity', ascending=False)
-    # print(recommand_df)
+    print(recommend_df['pk'])
     
-    return Response(recommand_df[['pk', 'title']])
+
+    recommend_list = []
+
+    for id in recommend_df['pk']:
+        movie = Movie.objects.get(pk=id)
+        serializer = RecommendSerializer(movie)
+        recommend_list.append(serializer.data)
+    print(recommend_list)
+
+    return Response(recommend_list)
