@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     movies() {
-      return this.$store.state.movieDetail
+      return this.$store.state.movie_list
     }
   }
 }

@@ -2,8 +2,8 @@
   <div>
     <h1>로그인</h1>
     <form @submit.prevent="logIn">
-      <label for="username">username :</label>
-      <input type="text" id="username" v-model="username">
+      <label for="email">email :</label>
+      <input type="text" id="email" v-model="email">
       <br>
       <label for="password">password :</label>
       <input type="password" id="password" v-model="password">
@@ -19,17 +19,17 @@ export default {
   name: 'LogInView',
   data() {
     return {
-      username: null,
+      email: null,
       password: null,
       user_info: null,
     }
   },
   methods: {
     logIn() {
-      const username = this.username
+      const email = this.email
       const password = this.password
       const payload = {
-        username, password
+        email, password
       }
       this.$store.dispatch('logIn', payload)
       this.$router.push({ name: 'home'})

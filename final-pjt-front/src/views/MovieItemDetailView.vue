@@ -1,20 +1,23 @@
 <template>
   <div>
     <h1>영화 디테일 페이지입니다</h1>
+    <h1>{{ addWishListUserNumber }}</h1>
     <button @click="addToWishList">위시리스트 추가</button>
     <img :src="movieItemDetailPoster">
     <h1>{{ movieItemDetail.title }}</h1>
     <li v-for="(genre, idx) in genres" :key="idx">{{genre.name}}</li>
-    <h1>리뷰작성</h1>
-    <form>
-      <label for="review_content">내용</label>
-      <input type="text" v-model="review_content" id="review_content">
-      <br>
-      <label for="review_rate">점수</label>
-      <input type="number" v-model="review_rate" id="review_rate">
-      <button @click.prevent="createReview">작성하기</button>
-      
-    </form>
+    <div>
+      <h1>리뷰작성</h1>
+      <form>
+        <label for="review_content">내용</label>
+        <input type="text" v-model="review_content" id="review_content">
+        <br>
+        <label for="review_rate">점수</label>
+        <input type="number" v-model="review_rate" id="review_rate">
+        <button @click.prevent="createReview">작성하기</button>
+        
+      </form>
+    </div>
     <h1>{{ review_content }} {{review_rate}}</h1>
     <ActorList/>
     <ReviewList/>
@@ -66,7 +69,7 @@ export default {
     },
     getMovieReview() {
       this.$store.dispatch('getMovieReview', this.$route.params.movieId)
-    }
+    },
   },
   computed: {
     movieItemDetail() {
@@ -79,6 +82,9 @@ export default {
     },
     genres() {
       return this.$store.state.genres.genres
+    },
+    addWishListUserNumber() {
+      return this.$store.getters.addWishListUserNumber
     }
   }
 }

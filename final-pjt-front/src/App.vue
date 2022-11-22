@@ -20,9 +20,15 @@ export default {
       return this.$store.getters.isLoggedIn
     }
   },
+  created() {
+    this.getMovieList()
+  },
   methods: {
     logOut() {
       this.$store.dispatch('logOut')
+    },
+    getMovieList() {
+      this.$store.dispatch('getMovieList')
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link to="/watchlater">WatchLater</router-link>
-    <h1></h1>
+    <h1>{{ userInfo }}</h1>
     <PreferenceUser/>
     <ReviewList/>
   </div>
@@ -17,6 +17,11 @@ export default {
     PreferenceUser,
     ReviewList,
   },
+  computed: {
+    userInfo() {
+      return this.$store.state.user_info
+    }
+  }
 }
 </script>
 
