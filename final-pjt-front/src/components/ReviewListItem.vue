@@ -1,12 +1,17 @@
 <template>
   <div>
-    <h1>리뷰입니다.</h1>
+    <h1> {{ review.content }}</h1>
+    <h1> {{ review.rate }}</h1>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ReviewListItem',
+  props: {
+    review: Object,
+  },
+  
 }
 </script>
 

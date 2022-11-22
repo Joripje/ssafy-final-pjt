@@ -2,6 +2,9 @@
   <div>
     <h1>Sign Up Page</h1>
     <form @submit.prevent="signUp">
+      <label for="email">email : </label>
+      <input type="text" id="email" v-model="email"><br>
+
       <label for="username">username : </label>
       <input type="text" id="username" v-model="username"><br>
 
@@ -21,6 +24,7 @@ export default {
   name: 'SignUpView',
   data() {
     return {
+      email: null,
       username: null,
       password1: null,
       password2: null,
@@ -28,21 +32,23 @@ export default {
   },
   methods: {
     signUp() {
+      const email = this.email
       const username = this.username
       const password1 = this.password1
       const password2 = this.password2
 
       const payload = {
-        // username,
+        // email,
         // password1,
         // password2,
+        email: email,
         username: username,
         password1: password1,
         password2: password2,
       }
 
       this.$store.dispatch('signUp', payload)
-
+      this.$router.push({ name: 'home'})
     }
   }
 }
