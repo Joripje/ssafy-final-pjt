@@ -45,3 +45,9 @@ class PreferGenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('review_user',)
+
+class RecommendSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Movie
+        fields = '__all__'

@@ -2,16 +2,16 @@
   <div>
     <h1>맞춤 추천 영화</h1>
     <hr>
-    <MovieList/>
+    <RecommendMovieList/>
   </div>
 </template>
 
 <script>
-import MovieList from '@/components/MovieList.vue'
+import RecommendMovieList from '@/components/RecommendMovieList.vue'
 export default {
   name: 'RecommendMovie',
   components: {
-    MovieList,
+    RecommendMovieList,
   }
 }
 </script>
