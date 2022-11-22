@@ -43,6 +43,7 @@ const routes = [
     beforeEnter(to, from, next) {
       store.dispatch('getWishList')
       next()
+    }
   },
   {
     path: '/movieitemdetail/:movieId',
