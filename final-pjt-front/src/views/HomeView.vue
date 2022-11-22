@@ -24,7 +24,9 @@ export default {
       return this.$store.getters.isLoggedIn
     }
   },
-
+  created() {
+  this.$store.dispatch('getMovieList')
+}
 }
 </script>
 
