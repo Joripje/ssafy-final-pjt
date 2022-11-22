@@ -4,6 +4,7 @@ import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 
 const API_URL = 'http://127.0.0.1:8000'
+const TMDB_API_KEY = process.env.TMDB_API_KEY
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -210,15 +211,30 @@ export default new Vuex.Store({
     getMovieList(context) {
       axios({
         method: 'get',
-        url: `${API_URL}/api/v1/movies/movie_list/`,
+        url: `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=ko-KR&page=1&region=KR`,
         // headers: {
         //   Authorization: `Token ${this.state.token}`
         // }
       })
         .then(res => {
-          context.commit('GET_MOVIE_LIST', res.data)
-          // console.log(res)
-
+          context.commit('GET_MOVIE_LIST', res.data.results)
+          console.log(res.data.results)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getWishList(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/accounts/profile/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`
+        }
+      })
+        .then(res => {
+          context.commit('GET_MOVIE_LIST', res.data.wish_movie)
+          console.log(res.data.wish_movie)
         })
         .catch(err => {
           console.log(err)

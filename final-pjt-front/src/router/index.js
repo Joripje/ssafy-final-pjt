@@ -7,7 +7,7 @@ import SignUpView from '../views/SignUpView.vue'
 import SearchView from '../views/SearchView.vue'
 import WatchLaterView from '../views/WatchLaterView.vue'
 import MovieItemDetailView from '../views/MovieItemDetailView.vue'
-
+import store from '@/store/index.js'
 Vue.use(VueRouter)
 
 const routes = [
@@ -39,7 +39,10 @@ const routes = [
   {
     path: '/watchlater',
     name: 'watchlater',
-    component: WatchLaterView
+    component: WatchLaterView,
+    beforeEnter(to, from, next) {
+      store.dispatch('getWishList')
+      next()
   },
   {
     path: '/movieitemdetail/:movieId',
