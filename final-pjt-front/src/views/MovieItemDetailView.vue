@@ -6,7 +6,7 @@
     <img :src="movieItemDetailPoster">
     <h1>{{ movieItemDetail.title }}</h1>
     <li v-for="(genre, idx) in genres" :key="idx">{{genre.name}}</li>
-    <div>
+    <div v-if="isLoggedIn === true">
       <h1>리뷰작성</h1>
       <form>
         <label for="review_content">내용</label>
@@ -85,7 +85,11 @@ export default {
     },
     addWishListUserNumber() {
       return this.$store.getters.addWishListUserNumber
+    },
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn
     }
+    
   }
 }
 </script>
