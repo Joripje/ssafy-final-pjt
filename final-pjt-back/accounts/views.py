@@ -13,7 +13,7 @@ import json
 import pandas as pd
 # import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 # Create your views here.
 
@@ -146,7 +146,6 @@ def recommend(request):
     with open('movies/fixtures/movies.json', 'r', encoding='UTF8') as file:
         json_ = json.loads(file.read())   
 
-    # print(user_prefer_genre)
     json_data = []
 
     # 사용자 선호 장르를 데이터프레임 0번 인덱스에 넣음
@@ -155,7 +154,6 @@ def recommend(request):
     data_dict['title'] = '사용자'
     data_dict['vote_count'] = 0
     data_dict['vote_average'] = 0
-    # data_dict['genres'] = ['12', '18', '35']
     data_dict['genres'] = user_prefer_genre
 
     json_data.append(data_dict)
