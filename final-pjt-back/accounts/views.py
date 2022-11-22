@@ -29,6 +29,28 @@ def profile(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def genre_prefer(request):
+    genre_dict = {
+        12: '모험',
+        14: '판타지',
+        16: '애니메이션',
+        18: '드라마',
+        27: '공포',
+        28: '액션',
+        35: '코미디',
+        36: '역사',
+        37: '서부',
+        53: '스릴러',
+        80: '범죄',
+        99: '다큐멘터리',
+        878: 'SF',
+        9648: '미스터리',
+        10402: '음악',
+        10749: '로맨스',
+        10751: '가족',
+        10752: '전쟁',
+        10770: 'TV 영화',
+    }
+
     prefer_dict = {
         12: 0,
         14: 0,
@@ -64,34 +86,53 @@ def genre_prefer(request):
             prefer_dict[gen] += 1
              
     print(prefer_dict)
-    return Response(serializer.data)
 
-# 
+    val = set()
+    for key, value in prefer_dict.items():
+        val.add(value)
+
+    val = sorted(val, reverse=True)
+    
+    user_prefer_genre = []
+    
+    for v in val:
+        for key, value in prefer_dict.items():
+            
+            if value == v and v:
+                user_prefer_genre.append({genre_dict[key] : value})
+                
+        if len(user_prefer_genre) >= 3:
+            break
+
+    print(user_prefer_genre)
+    return Response(user_prefer_genre)
+
+# 장르기반 추천
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def recommend(request):
     # 장르딕셔너리
     genre_dict = {
-            12: 'adventure',
-            14: 'fantasy',
-            16: 'animation',
-            18: 'drama',
-            27: 'horror',
-            28: 'action',
-            35: 'comedy',
-            36: 'historical',
-            37: 'western',
-            53: 'thriller',
-            80: 'crime',
-            99: 'documentary',
-            878: 'sf',
-            9648: 'mistery',
-            10402: 'musical',
-            10749: 'romance',
-            10751: 'family',
-            10752: 'war',
-            10770: 'tvmovie',
-        }
+        12: 'adventure',
+        14: 'fantasy',
+        16: 'animation',
+        18: 'drama',
+        27: 'horror',
+        28: 'action',
+        35: 'comedy',
+        36: 'historical',
+        37: 'western',
+        53: 'thriller',
+        80: 'crime',
+        99: 'documentary',
+        878: 'sf',
+        9648: 'mistery',
+        10402: 'musical',
+        10749: 'romance',
+        10751: 'family',
+        10752: 'war',
+        10770: 'tvmovie',
+    }
     prefer_dict = {
         12: 0,
         14: 0,
@@ -126,6 +167,7 @@ def recommend(request):
         for gen in genre_list:
             prefer_dict[gen] += 1
 
+    print(prefer_dict)
     val = set()
     for key, value in prefer_dict.items():
         val.add(value)
@@ -204,7 +246,6 @@ def recommend(request):
     recommend_df = df[1:].sort_values(by=['similarity', 'weighted_score'], ascending=False)
 
     # recommand_df = df[1:].sort_values(by='similarity', ascending=False)
-    print(recommend_df['pk'])
     
 
     recommend_list = []
@@ -213,6 +254,5 @@ def recommend(request):
         movie = Movie.objects.get(pk=id)
         serializer = RecommendSerializer(movie)
         recommend_list.append(serializer.data)
-    print(recommend_list)
 
     return Response(recommend_list)
