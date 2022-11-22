@@ -5,4 +5,5 @@ app_name = 'accounts'
 urlpatterns = [
     path('profile/', views.profile),
     path('genre_prefer/', views.genre_prefer),
+    path('recommend/', views.recommend),
 ]
