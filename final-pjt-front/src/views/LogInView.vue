@@ -24,6 +24,11 @@ export default {
       user_info: null,
     }
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn
+    }
+  },
   methods: {
     logIn() {
       const email = this.email
@@ -32,7 +37,10 @@ export default {
         email, password
       }
       this.$store.dispatch('logIn', payload)
-      this.$router.push({ name: 'home'})
+      if (this.isLoggedIn === true) {
+        this.$router.push({ name: 'home'})
+
+      }
     },
   },
 
