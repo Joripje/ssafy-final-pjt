@@ -3,7 +3,7 @@
   <v-app id="inspire">
     <v-hover v-slot="{ hover }">
       <v-card
-        class="mx-auto"
+        class="mx-1"
         color="grey lighten-4"
         width="300"
       >

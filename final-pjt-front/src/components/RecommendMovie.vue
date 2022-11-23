@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>맞춤 추천 영화</h1>
-    <hr>
     <RecommendMovieList/>
   </div>
 </template>

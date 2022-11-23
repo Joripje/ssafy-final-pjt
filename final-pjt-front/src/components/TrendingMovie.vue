@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>최근 인기 영화</h1>
-    <hr>
     <MovieList/>
   </div>
 </template>

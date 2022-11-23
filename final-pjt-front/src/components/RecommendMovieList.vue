@@ -1,6 +1,6 @@
 <template>
   <div>
-    <horizontal-scroll class="horizontal-scroll">
+    <horizontal-scroll class="horizontal-scroll" style="overflow-x:hidden">
       <RecommendMovieListItem
         v-for="(movie, index) in movies"
         :key="index"
@@ -30,5 +30,11 @@ export default {
 </script>
 
 <style>
-
+.horizontal-scroll {
+    display: flex;
+    width: 100%;
+    height: 350pt;
+    margin: 10pt;
+    border: none;
+}
 </style>
