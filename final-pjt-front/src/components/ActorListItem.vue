@@ -1,8 +1,15 @@
 <template>
-  <div>
-    <img :src="actorProfile">
-    <h1>{{ actor.name }}</h1>
-  </div>
+  <v-card
+    class="mx-auto my-12"
+    max-width="200"
+  >
+    <v-img
+      height="250"
+      :src="actorProfile"
+    ></v-img>
+
+    <v-card-title>{{ actor.name }}</v-card-title>
+  </v-card>
 </template>
 
 <script>
