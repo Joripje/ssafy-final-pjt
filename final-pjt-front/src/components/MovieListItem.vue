@@ -1,63 +1,76 @@
 <template>
-  <div>
-    <!-- <h1>{{ movie.title }}</h1>
-    <img :src="moviePoster" @click="goToDetail">
-    <br>
-    <hr> -->
-    <div id="app">
-    <v-app id="inspire">
-    <v-card
-      class="mx-auto my-12"
-      max-width="374"
-      @click="goToDetail"
-    >
-      <template slot="progress">
-        <v-progress-linear
-          color="deep-purple"
-          height="10"
-          indeterminate
-        ></v-progress-linear>
-      </template>
-  
-      <v-img
-        height="250"
-        :src="moviePoster"
-      ></v-img>
-  
-      <v-card-title>{{ movie.title }}</v-card-title>
-  
-      <v-card-text>
-        <v-row
-          align="center"
-          class="mx-0"
+  <div id="app">
+  <v-app id="inspire">
+    <v-hover v-slot="{ hover }">
+      <v-card
+        class="mx-auto"
+        color="grey lighten-4"
+        width="300"
+      >
+        <v-img
+          :aspect-ratio="3/4"
+          :src="moviePoster"
         >
-          <v-rating
-            :value="vote_average / 2"
-            color="amber"
-            dense
-            half-increments
-            readonly
-            size="14"
-          ></v-rating>
-  
-          <div class="grey--text ms-4">
-            {{ movie.vote_average }}
-          </div>
-        </v-row>
-  
-        <div class="my-4 text-subtitle-1">
-          <li v-for="(genre, idx) in genres" :key="idx">{{genre.name}}</li>
-        </div>
-  
-        <div>{{ movie.overview }}</div>
-      </v-card-text>
-  
-      <v-divider class="mx-4"></v-divider>
-    </v-card>
+          <v-expand-transition>
+            <div
+              v-if="hover"
+              class="d-flex v-card--reveal"
+              style="height: 100%;"
+            >
+              
+
+              <v-row align="center" justify="center">
+                <v-col cols="12">
+                  <v-hover v-slot="{ hover }">
+                    <v-card @click="goToDetail" class="mx-auto my-12" max-width="374" :elevation="hover ? 12 : 2">
+                      <template slot="progress">
+                        <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
+                      </template>
+                      
+                      <v-card-title>{{ movie.title }}</v-card-title>
+                      <v-card-text>
+                        <v-row align="center" class="mx-0">
+                          <v-rating :value="vote_average / 2" color="amber" dense half-increments readonly size="14"></v-rating>
+                          <div>
+                            {{ vote_average }}
+                            <br>
+                            <br>
+                          </div>
+                        </v-row>
+                        <div>
+                          {{ movie.overview }}
+                        </div>
+                        </v-card-text>
+                      </v-card>         
+                  </v-hover>
+                </v-col>
+              </v-row>
+
+
+            </div>
+          </v-expand-transition>
+        </v-img>
+        <v-card-text
+          class="pt-6"
+          style="position: relative;"
+        >
+          <v-btn @click="addToWishList"
+            absolute
+            color="red"
+            class="white--text"
+            fab
+            right
+            top
+          >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+          
+        </v-card-text>
+      </v-card>
+    </v-hover>
   </v-app>
 </div>
 
-  </div>
 </template>
 
 <script>
@@ -85,11 +98,21 @@ export default {
     goToDetail() {
       
       this.$router.push({ name: 'movieitemdetail', params: { movieId: this.movie.id } })
-    }
+    },
+    addToWishList() {
+      this.$store.dispatch('addToWishList', this.movie.id)
+    },
   }
 }
 </script>
 
 <style>
-
+  .v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+}
 </style>
