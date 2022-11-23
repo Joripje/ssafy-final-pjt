@@ -1,20 +1,26 @@
 <template>
   <div>
-    <h1>출연배우</h1>
-    <ActorListItem
-      v-for="(actor, id) in actors"
-      :key="id"
-      :actor="actor"
-    />
+    <h1>배우목록</h1>
+    <horizontal-scroll class="horizontal-scroll" style="overflow-x:hidden">
+      <ActorListItem
+        v-for="(actor, id) in actors"
+        :key="id"
+        :actor="actor"
+      />
+    </horizontal-scroll>
   </div>
 </template>
 
 <script>
 import ActorListItem from '@/components/ActorListItem.vue'
+import HorizontalScroll from 'vue-horizontal-scroll'
+import 'vue-horizontal-scroll/dist/vue-horizontal-scroll.css'
+
 export default {
   name: 'ActorList',
   components: {
     ActorListItem,
+    HorizontalScroll,
   },
   created() {
     this.getActorsWithMovieId()
@@ -34,5 +40,11 @@ export default {
 </script>
 
 <style>
-
+.horizontal-scroll {
+    display: flex;
+    width: 100%;
+    height: 250pt;
+    margin: 10pt;
+    border: none;
+}
 </style>
