@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from movies.models import *
 from .serializers import *
 from collections import OrderedDict
+import random
 
 # 추천기능 import
 import json
@@ -290,3 +291,16 @@ def recommend(request):
             break
 
     return Response(recommend_list)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def profile_image(request):
+    user = request.user
+    serializer = ProfileSerializer(user)
+
+    
+    # reviews = dict(OrderedDict(serializer.data['review_user']))
+    # print(len(serializer.data['review_user']))
+    n = random.randint(0, len(serializer.data['review_user']) - 1)
+    print(n)
+    return Response(serializer.data['review_user'][n]['movie']["backdrop_path"])
