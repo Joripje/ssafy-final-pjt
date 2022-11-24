@@ -1,5 +1,9 @@
 <template>
-  <DoughnutChart />
+  <div>
+    <DoughnutChart
+    :preferList='preferList'/>
+    {{ message }}
+  </div>
 </template>
 
 <script>
@@ -9,6 +13,20 @@ export default {
   name: 'PreferenceUser',
   components: {
     DoughnutChart
+  },
+  data() {
+    return {
+      preferList: null
+    }
+  },
+  created() {
+    this.getPreferList()
+  },
+  methods: {
+    getPreferList() {
+      this.$store.dispatch('getPreferList')
+      this.preferList = this.$store.state.prefer_list
+    }
   }
 }
 </script>

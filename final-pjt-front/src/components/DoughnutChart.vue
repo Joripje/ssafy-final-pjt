@@ -59,16 +59,17 @@ export default {
     plugins: {
       type: Array,
       default: () => []
-    }
+    },
+    preferList: Object,
   },
   data() {
     return {
       chartData: {
-        labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+        labels: this.preferList.label,
         datasets: [
           {
-            backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-            data: [40, 20, 80, 10]
+            backgroundColor: this.preferList.color,
+            data: this.preferList.scale
           }
         ]
       },
@@ -78,6 +79,9 @@ export default {
       }
     }
   },
+  computed: {
+
+  }
   
 }
 </script>
