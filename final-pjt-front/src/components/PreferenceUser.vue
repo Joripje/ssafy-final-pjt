@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h2>선호 장르</h2>
+    <br>
     <DoughnutChart
     :preferList='preferList'/>
   </div>

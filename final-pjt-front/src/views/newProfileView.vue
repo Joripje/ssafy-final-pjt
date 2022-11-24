@@ -28,14 +28,8 @@
           </v-app-bar>
 
           <v-card-title class="white--text mt-8">
-            <v-avatar size="56">
-              <img
-                alt="user"
-                src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-              >
-            </v-avatar>
             <p class="ml-3">
-              John Doe
+              {{ userInfo.username }}
             </p>
           </v-card-title>
         </v-img>
