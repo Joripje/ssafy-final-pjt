@@ -3,19 +3,18 @@
     <v-container class="col-6 mx-auto">
     <v-row justify="space-around">
       <v-card width="100%">
-        <v-img
+        <v-img class='my-0'
           height="350px"
           src="https://image.tmdb.org/t/p/original/5Iw7zQTHVRBOYpA0V6z0yypOPZh.jpg"
+          gradient="to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, .4)"
           alt=""
         >
           </v-img>
 
         <v-card-text>
-          <div class="font-weight-bold ml-8 mb-2">
+          <div class="font-weight-bold ml-8 mb-0">
             
           </div>
-
-                
                 <h1> {{userInfo.username}}님 안녕하세요. </h1>
                 <br>
                 <PreferenceUser/>

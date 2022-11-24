@@ -23,6 +23,9 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Actor, related_name='actor_movie')
     wish_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='wish_movie', blank=True)  # 해당 영화를 위시리스트에 추가한 사람들
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class Review(models.Model):
     movie = models.ForeignKey(Movie, related_name='movie_review', on_delete=models.CASCADE)
@@ -32,3 +35,4 @@ class Review(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_review', blank=True)  # 해당 리뷰를 좋아하는 사람들
+
