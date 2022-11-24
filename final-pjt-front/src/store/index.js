@@ -36,9 +36,7 @@ export default new Vuex.Store({
     prefer_list : [
 
     ],
-    user_review: [
-
-    ],
+    user_review: null,
   },
   getters: {
     isLoggedIn(state) {

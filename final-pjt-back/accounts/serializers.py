@@ -7,7 +7,7 @@ class MovieTitleSerializer(serializers.ModelSerializer):
 
         class Meta:
             model = Movie
-            fields = ('id', 'title',)
+            fields = ('id', 'title', "backdrop_path")
 
 class ProfileSerializer(serializers.ModelSerializer):
 
@@ -15,7 +15,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
         class Meta:
             model = Movie
-            fields = ('id', 'title', 'genres', 'poster_path',)
+            fields = ('id', 'title', 'genres', 'poster_path', 'overview')
 
 
 
@@ -41,7 +41,7 @@ class PreferGenreSerializer(serializers.ModelSerializer):
         class MovieSerializer(serializers.ModelSerializer):
             class Meta:
                 model = Movie
-                fields = ('genres',)
+                fields = ('genres', )
 
         movie = MovieSerializer()
 
