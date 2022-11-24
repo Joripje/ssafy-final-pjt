@@ -1,7 +1,7 @@
 <template>
   <div id="app">
   <v-app id="inspire">
-    <v-hover v-slot="{ hover }">
+    <v-hover v-slot="{ hover }" open-delay="500">
       <v-card
         class="mx-1"
         color="grey lighten-4"

@@ -40,11 +40,11 @@ export default {
 </script>
 
 <style>
-.horizontal-scroll {
+/* .horizontal-scroll {
     display: flex;
     width: 100%;
     height: 250pt;
     margin: 10pt;
     border: none;
-}
+} */
 </style>
