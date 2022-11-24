@@ -18,7 +18,7 @@
       <v-window v-model="step">
         <v-window-item :value="1">
           <v-card-text>
-            <v-text-field
+            <v-text-field @keyup.enter="step++"
               label="Email"
               v-model="email"
             ></v-text-field>
@@ -35,7 +35,7 @@
               type="password"
               v-model="password1"
             ></v-text-field>
-            <v-text-field
+            <v-text-field @keyup.enter="step++"
               label="Confirm Password"
               type="password"
               v-model="password2"
@@ -48,7 +48,7 @@
 
         <v-window-item :value="3">
           <v-card-text>
-            <v-text-field
+            <v-text-field @keyup.enter="signUp"
               label="username"
               v-model="username"
             ></v-text-field>

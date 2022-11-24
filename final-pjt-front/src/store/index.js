@@ -142,9 +142,9 @@ export default new Vuex.Store({
       })
         .then(res => {
           console.log(res)
-
+          router.push({ name: 'home'})
         })
-        .catch(err => console.log(err))
+        .catch(alert('회원정보를 확인해주세요'))
     },
     logIn(context, payload) {
       const email = payload.email
@@ -173,7 +173,7 @@ export default new Vuex.Store({
               console.log(err)
             })
         })
-        .catch(err => console.log(err))
+        .catch(alert('회원정보를 확인해주세요'))
     },
     logOut(context) {
       axios({
