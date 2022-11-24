@@ -1,16 +1,3 @@
-
-  <!-- <div>
-    <h1>로그인</h1>
-    <form @submit.prevent="logIn">
-      <label for="email">email :</label>
-      <input type="text" id="email" v-model="email">
-      <br>
-      <label for="password">password :</label>
-      <input type="password" id="password" v-model="password">
-      <br>
-      <input type="submit" value="logIn">
-    </form>
-  </div> -->
 <template>
   <div id="app">
   <v-app id="inspire">

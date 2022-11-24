@@ -38,22 +38,7 @@
 
  
      
-    <v-card-text
-          class="pt-6"
-          style="position: relative;"
-        >
-          <v-btn @click="addToWishList"
-            absolute
-            color="red"
-            class="white--text"
-            fab
-            right
-            top
-          >
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-          
-        </v-card-text>
+
 
   </v-card>
 </template>
