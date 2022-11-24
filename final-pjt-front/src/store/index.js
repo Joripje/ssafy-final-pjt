@@ -36,6 +36,9 @@ export default new Vuex.Store({
     prefer_list : [
 
     ],
+    user_review: [
+
+    ],
   },
   getters: {
     isLoggedIn(state) {
@@ -76,6 +79,9 @@ export default new Vuex.Store({
     },
     GET_PREFER_LIST(state, prefer_list) {
       state.prefer_list = prefer_list
+    },
+    GET_USER_REVIEW(state, review_movie) {
+      state.user_review = review_movie
     }
   },
   actions: {
@@ -161,6 +167,7 @@ export default new Vuex.Store({
           })
             .then((res) => {
                 context.commit('GET_USER_INFO', res.data)
+                console.log(res.data)
             })
             .catch((err) => {
               console.log(err)
@@ -287,6 +294,27 @@ export default new Vuex.Store({
             res.data
             context.commit('GET_PREFER_LIST', res.data)
             console.log(res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        console.log('없음')
+      }
+      
+    },
+    getUserReview(context) {
+      if (this.state.token) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/accounts/profile/`,
+          headers: {
+            Authorization: `Token ${this.state.token}`
+          }
+        })
+          .then(res => {
+            res.data
+            context.commit('GET_USER_REVIEW', res.data.review_user)
           })
           .catch(err => {
             console.log(err)

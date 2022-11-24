@@ -2,7 +2,6 @@
   <div>
     <DoughnutChart
     :preferList='preferList'/>
-    {{ message }}
   </div>
 </template>
 
