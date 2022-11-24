@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>나중에 볼 영화 목록입니다</h1>
+  <div style="padding: 40px;">
+    <h1 style="color: white; float: left;">위시리스트</h1>
     <MovieList/>
   </div>
 </template>

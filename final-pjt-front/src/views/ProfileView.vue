@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 40px;">
     <v-container class="col-6 mx-auto">
     <v-row justify="space-around">
       <v-card width="100%">
@@ -19,7 +19,19 @@
                 <br>
                 <PreferenceUser/>
                 <br>
-                <router-link to="/watchlater">위시리스트 확인</router-link>
+                <v-app id="inspire">
+                  <v-row
+                    justify="space-around"
+                  >
+                    <v-btn @click="$router.push('/watchlater')"
+                      depressed
+                      color="red"
+                    >
+                      위시리스트 보러가기
+                    </v-btn>
+                  </v-row>
+                </v-app>
+                
                 <br>
                 <br>
                 <div align="center">

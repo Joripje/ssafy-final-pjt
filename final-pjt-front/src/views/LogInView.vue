@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="padding: 40px;">
   <v-app id="inspire" style="height: 300px;">
     <v-card
       class="mx-auto"
@@ -69,17 +69,16 @@
         >
           LOGIN
         </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-app>
-  <v-app id="inspire">
-    <v-btn
+        <v-btn
+          
           color="primary"
           depressed
           @click="$router.push('/signup')"
         >
           회원가입
         </v-btn>
+      </v-card-actions>
+    </v-card>
   </v-app>
   
 </div>
@@ -118,10 +117,6 @@ export default {
         email, password
       }
       this.$store.dispatch('logIn', payload)
-      if (this.isLoggedIn === true) {
-        this.$router.push({ name: 'home'})
-
-      }
     },
   },
 

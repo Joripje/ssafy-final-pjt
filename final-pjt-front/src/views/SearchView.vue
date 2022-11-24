@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 40px;">
     <br>
     <h1 style="color: white">검색 결과</h1>
     <br>

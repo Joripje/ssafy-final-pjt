@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
-
+import router from '../router'
 const API_URL = 'http://127.0.0.1:8000'
 Vue.use(Vuex)
 const TMDB_API_KEY="c77ef5df652e2127c8855d6cae700acb"
@@ -167,7 +167,7 @@ export default new Vuex.Store({
           })
             .then((res) => {
                 context.commit('GET_USER_INFO', res.data)
-                console.log(res.data)
+                router.push({ name: 'home'})
             })
             .catch((err) => {
               console.log(err)

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="padding: 40px;">
   <v-app id="inspire">
     <v-card
       class="mx-auto"
