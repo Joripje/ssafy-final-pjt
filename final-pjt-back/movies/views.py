@@ -14,8 +14,10 @@ from .serializers import *
 
 @api_view(['GET'])
 def movie_detail(request, movie_pk):
-    movie = Movie.objects.get(pk=movie_pk)
-    if not movie:
+    try:
+        movie = Movie.objects.get(pk=movie_pk)
+
+    except Movie.DoesNotExist:
         movie_info = new_movie(movie_pk)
         movie = Movie()
         movie.pk = movie_info['movie']['id']
@@ -27,6 +29,7 @@ def movie_detail(request, movie_pk):
         movie.vote_average = movie_info['movie']['vote_average']
         movie.overview = movie_info['movie']['overview']
         movie.save()
+        
     movie = Movie.objects.get(pk=movie_pk)
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
