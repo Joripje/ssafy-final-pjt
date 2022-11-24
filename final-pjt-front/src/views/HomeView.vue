@@ -1,7 +1,7 @@
 <template>
   <div>
-    <TrendingMovie/>
-    <RecommendMovie v-if="isLoggedIn === true" />
+    <TrendingMovie style="height: 400pt"/>
+    <RecommendMovie v-if="isLoggedIn === true" style="height: 200pt"/>
     
   </div>
 
