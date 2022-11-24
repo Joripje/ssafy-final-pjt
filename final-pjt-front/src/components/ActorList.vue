@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>배우목록</h1>
+    <h1 style="color: white; float: left;">배우목록</h1>
     <horizontal-scroll class="horizontal-scroll" style="overflow-x:hidden">
       <ActorListItem
         v-for="(actor, id) in actors"

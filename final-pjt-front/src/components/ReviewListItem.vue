@@ -7,8 +7,8 @@
   </div> -->
 <template>
   <v-card
-    class="mx-auto my-12"
-    max-width="374"
+    class="mx-5 my-12"
+    max-width="500"
   >
 
     <v-card-text>

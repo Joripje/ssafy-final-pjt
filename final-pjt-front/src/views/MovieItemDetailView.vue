@@ -1,108 +1,132 @@
 <template>
-  <div>
-    <div align ="center">
-      <v-card
-        class="mx-auto my-12"
-        max-width="374"
-      >
-      <v-img
-        height="250"
-        :src="movieItemDetailPoster"
-      ></v-img>
-      <v-card-title>{{ movieItemDetail.title }}</v-card-title>
-      <v-card-text>
-        <v-row
-          align="center"
-          class="mx-0"
-        >
-        <v-rating :value="movieItemDetail.vote_average / 2" color="amber" dense half-increments readonly size="14"></v-rating>
-          <div>
-            {{ movieItemDetail.vote_average }}
-            <br>
-            <br>
-          </div>
-        </v-row>
-        <div>{{ movieItemDetail.overview }}</div>
-      </v-card-text>
-    </v-card>
-
-
-    <!-- 위시리스트 추가 버튼 -->
-    <div id="app" style="padding: 20px; height: 50px;">
-      <v-app id="inspire">
-        <v-row
-          justify="space-around"
-        >
-          <v-btn @click="addToWishList"
-            depressed
-            color="red"
+  <div id="app" style="padding: 40px;">
+    <v-app id="inspire">
+      <v-container class="black">
+        <v-row no-gutters>
+          <v-col
+            cols="12"
+            sm="6"
+            md="6"
           >
-            위시리스트에 추가
-          </v-btn>
-        </v-row>
-      </v-app>
-    </div>
-  </div>
-  <div id="app" style="height: 200px;">
-    <v-app id="inspire" style="height: 200px;">
-      <v-card
-        class="mx-auto elevation-20"
-        color="red"
-        dark
-        style="width: 400px; "
-      >
-        <v-row justify="space-between">
-          <v-col cols="8">
-            <v-card-title>
-              <div>
-                <v-app id="inspire" style="height: 150px;">
-                  <v-container fluid>
-                    <v-row>
-                      
-                        <v-textarea
-                          style="width: 370px; height: 300px;"
-                          solo
-                          name="input-7-4"
-                          label="Solo textarea"
-                          v-model="review_content"
-                          background-color="red"
-                        ></v-textarea>
-                      
+            
+            <div>
+              <div align ="center">
+                <v-card
+                  class="mx-5 my-7"
+                  max-width="500"
+                >
+                  <v-img
+                    height=100%
+                    :src="movieItemDetailPoster"
+                  ></v-img>
+                  <v-card-title>{{ movieItemDetail.title }}</v-card-title>
+                  <v-card-text>
+                    <v-row
+                      align="center"
+                      class="mx-0"
+                    >
+                    <v-rating :value="movieItemDetail.vote_average / 2" color="amber" dense half-increments readonly size="14"></v-rating>
+                      <div>
+                        {{ movieItemDetail.vote_average }}
+                        <br>
+                        <br>
+                      </div>
                     </v-row>
-                  </v-container>
-                </v-app>
-                
+                    <div>{{ movieItemDetail.overview }}</div>
+                  </v-card-text>
+                </v-card>
               </div>
-            </v-card-title>
+
+              <!-- 위시리스트 추가 버튼 -->
+              <div id="app" style="padding: 0px; height: 30px;">
+                <v-app id="inspire">
+                  <v-row
+                    justify="space-around"
+                  >
+                    <v-btn @click="addToWishList"
+                      depressed
+                      color="red"
+                    >
+                      위시리스트에 추가
+                    </v-btn>
+                  </v-row>
+                </v-app>
+              </div>
+            </div>
+          </v-col>
+          <v-col
+            cols="6"
+            md="6"
+          >
+            <v-app id="inspire">
+              <v-card
+                class="elevation-16 mx-5 mt-7"
+                width="500"
+                
+              >
+                <v-card-title class="text-h5">
+                  리뷰 작성
+                </v-card-title>
+                <v-textarea
+                  style="width: 500px; height: 150px;"
+                  class="mx-5"
+                  label="리뷰 내용을 적어주세요"
+                  v-model="review_content"
+                  
+                >
+
+                </v-textarea>
+                <v-card-text>
+                  <div class="text-center mt-0">
+                    <v-rating
+                      v-model="review_rate"
+                      color="yellow darken-3"
+                      background-color="grey"
+                      empty-icon="$ratingFull"
+                      half-increments
+                      hover
+                      large
+                    ></v-rating>
+                  </div>
+                </v-card-text>
+                <v-card-actions class="justify-space-between">
+                  <v-btn  
+                    @click="createReview"
+                    color="primary"
+                    text
+                  >
+                    리뷰 제출
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-app>
+            <!-- 장르 표기 -->
+            <v-app id="inspire">
+              <v-card
+                class="mx-5 my-5"
+                width="500"
+              >
+                <v-list dense>
+                  <v-subheader>장르</v-subheader>
+                  <v-list-item-group >
+                    <v-list-item
+                      v-for="(genre, idx) in genres"
+                      :key="idx"
+                    >
+                      <v-list-item-content>
+                        <v-list-item-title v-text="genre.name"></v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </v-card>
+            </v-app>
+            <h1 class="mx-5" style="color: white; float:left;">리뷰 목록</h1>
+            <ReviewList/>
           </v-col>
         </v-row>
-        <v-divider dark></v-divider>
-        <v-card-actions class="pa-4">
-          <v-btn @click="createReview"
-            
-            color="red"
-          >
-            리뷰 작성
-          </v-btn>
-          <v-spacer></v-spacer>
-          <span class="grey--text text--lighten-2 text-caption mr-2">
-            ({{ review_rate }})
-          </span>
-          <v-rating
-            v-model="review_rate"
-            background-color="white"
-            color="yellow accent-4"
-            dense
-            half-increments
-            hover
-            size="18"
-          ></v-rating>
-        </v-card-actions>
-      </v-card>
+      </v-container>
     </v-app>
-  </div>
-    <li v-for="(genre, idx) in genres" :key="idx">{{genre.name}}</li>
-    <ReviewList/>
     <ActorList/>
   </div>
 </template>
@@ -186,5 +210,7 @@ export default {
 </script>
 
 <style>
-
+.div {
+  background-color: black;
+}
 </style>
