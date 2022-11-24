@@ -1,16 +1,18 @@
 <template>
   <div>
-    <h1 style="color: white;">검색화면 입니다</h1>
-    <MovieList/>
+
+    <h1>검색화면 입니다</h1>
+    <SearchList/>
+
   </div>
 </template>
 
 <script>
-import MovieList from '@/components/MovieList.vue'
+import SearchList from '@/components/SearchList'
 export default {
   name: 'SearchView',
   components: {
-    MovieList,
+    SearchList,
   }
 }
 </script>

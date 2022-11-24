@@ -1,66 +1,43 @@
 <template>
   <div>
-    <v-container>
+    <v-container class="col-6 mx-auto">
     <v-row justify="space-around">
       <v-card width="100%">
         <v-img
-          height="200px"
-          src=""
+          height="350px"
+          src="https://image.tmdb.org/t/p/original/5Iw7zQTHVRBOYpA0V6z0yypOPZh.jpg"
+          alt=""
         >
-          <v-app-bar
-            flat
-            color="rgba(0, 0, 0, 0)"
-          >
-
-            <v-btn
-              color="white"
-              icon
-            >
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </v-app-bar>
-
-          <v-card-title class="white--text mt-8">
-            <p class="ml-3">
-              {{ userInfo.username }}
-            </p>
-          </v-card-title>
-        </v-img>
+          </v-img>
 
         <v-card-text>
           <div class="font-weight-bold ml-8 mb-2">
             
           </div>
 
-          <v-timeline
-            align-top
-            dense
-          >
-            <v-timeline-item
-              v-for="message in messages"
-              :key="message.time"
-              :color="message.color"
-              small
-            >
-              <div>
-                <div class="font-weight-normal">
-                  <strong>{{ message.from }}</strong> @{{ message.time }}
+                
+                <h1> {{userInfo.username}}님 안녕하세요. </h1>
+                <br>
+                <PreferenceUser/>
+                <br>
+                <router-link to="/watchlater">위시리스트 확인</router-link>
+                <br>
+                <br>
+                <div align="center">
+                  <UserReview/>
                 </div>
-                <div>{{ message.message }}</div>
+              
+                <div class="font-weight-normal">
+    
               </div>
-            </v-timeline-item>
-          </v-timeline>
+            
+          
         </v-card-text>
       </v-card>
     </v-row>
   </v-container>
   
-    <router-link to="/watchlater">WatchLater</router-link>
-    <h1>{{ userInfo }}</h1>
-    <PreferenceUser/>
-    <div align="center">
-      <UserReview/>
-    </div>
+    
   </div>
 </template>
 
@@ -77,6 +54,16 @@ export default {
   computed: {
     userInfo() {
       return this.$store.state.user_info
+    },
+    
+  },
+  methods: {
+    movieImage() {
+      const BASE_URL = 'https://image.tmdb.org/t/p/original'
+      const poster_path = this.$store.state.movieItemDetail[0].backdrop_path
+      
+      console.log(poster_path)
+      return BASE_URL + poster_path
     },
   }
 }

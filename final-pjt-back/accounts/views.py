@@ -128,8 +128,9 @@ def genre_prefer(request):
                 color.append(prefer_color[len(label)])
                 scale.append(value)
                 
-        if len(user_prefer_genre) >= 3:
+        if len(scale) >= 5:
             break
+
     user_prefer_genre['label'] = label
     user_prefer_genre['color'] = color
     user_prefer_genre['scale'] = scale

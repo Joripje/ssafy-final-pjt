@@ -1,10 +1,22 @@
 <template>
-  <div>
-    <UserReviewItem
-    v-for="(review, index) in reviews"
-    :key="index"
-    :review="review"
-    />
+  <div class="col-8">
+    <v-expansion-panels
+      
+      v-model="panel"
+      :readonly="readonly"
+      multiple
+    >
+    <v-expansion-panel>
+        <v-expansion-panel-header>작성한 리뷰</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <UserReviewItem
+            v-for="(review, index) in reviews"
+            :key="index"
+            :review="review"
+            />
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </div>
 </template>
 

@@ -61,6 +61,11 @@ export default {
       default: () => []
     },
     preferList: Object,
+    options: {
+      legend: {
+        position: 'right'
+    },
+  }
   },
   data() {
     return {
