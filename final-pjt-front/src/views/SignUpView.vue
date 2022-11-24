@@ -57,21 +57,6 @@
             </span>
           </v-card-text>
         </v-window-item>
-  
-        <!-- <v-window-item :value="4">
-          <div class="pa-4 text-center">
-            <v-img
-              class="mb-4"
-              contain
-              height="128"
-              src="https://cdn.vuetifyjs.com/images/logos/v.svg"
-            ></v-img>
-            <h3 class="text-h6 font-weight-light mb-2">
-              Welcome to Vuetify
-            </h3>
-            <span class="text-caption grey--text">Thanks for signing up!</span>
-          </div>
-        </v-window-item> -->
       </v-window>
   
       <v-divider></v-divider>
