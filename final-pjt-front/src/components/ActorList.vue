@@ -1,26 +1,29 @@
 <template>
   <div>
     <h1 style="color: white; float: left;">배우목록</h1>
-    <horizontal-scroll class="horizontal-scroll" style="overflow-x:hidden">
+    <Flicking :options="{ align: 'prev', circular: false, bound: true, duration: 500, moveType: ['strict', { count: 3 }]}" :plugins="plugins">
       <ActorListItem
         v-for="(actor, id) in actors"
         :key="id"
         :actor="actor"
       />
-    </horizontal-scroll>
+    </Flicking>
+    <span class="flicking-arrow-prev is-outside"></span>
+    <span class="flicking-arrow-next is-outside"></span>
   </div>
 </template>
 
 <script>
 import ActorListItem from '@/components/ActorListItem.vue'
-import HorizontalScroll from 'vue-horizontal-scroll'
-import 'vue-horizontal-scroll/dist/vue-horizontal-scroll.css'
+import { AutoPlay, Arrow } from "@egjs/flicking-plugins"
+
+const plugins = [new AutoPlay({ duration: 2500, direction: "NEXT", stopOnHover: true, delayAfterHover:500}), new Arrow(({ parentEl: document.body }))];
 
 export default {
   name: 'ActorList',
   components: {
     ActorListItem,
-    HorizontalScroll,
+
   },
   created() {
     this.getActorsWithMovieId()
@@ -34,6 +37,11 @@ export default {
   computed: {
     actors() {
       return this.$store.state.actors.actors
+    }
+  },
+  data() {
+    return {
+      plugins
     }
   }
 }
