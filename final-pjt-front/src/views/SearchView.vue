@@ -1,7 +1,8 @@
 <template>
   <div>
-
-    <h1>검색화면 입니다</h1>
+    <br>
+    <h1 style="color: white">검색 결과</h1>
+    <br>
     <SearchList/>
 
   </div>
