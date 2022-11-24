@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
+from .newdb import new_movie
 
 from .models import *
 from .serializers import *
@@ -13,6 +14,22 @@ from .serializers import *
 
 @api_view(['GET'])
 def movie_detail(request, movie_pk):
+    try:
+        movie = Movie.objects.get(pk=movie_pk)
+
+    except Movie.DoesNotExist:
+        movie_info = new_movie(movie_pk)
+        movie = Movie()
+        movie.pk = movie_info['movie']['id']
+        movie.title = movie_info['movie']['title']
+        movie.release_date = movie_info['movie']['release_date']
+        movie.poster_path = movie_info['movie']['poster_path']
+        movie.backdrop_path = movie_info['movie']['backdrop_path']
+        movie.vote_count = movie_info['movie']['vote_count']
+        movie.vote_average = movie_info['movie']['vote_average']
+        movie.overview = movie_info['movie']['overview']
+        movie.save()
+        
     movie = Movie.objects.get(pk=movie_pk)
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
