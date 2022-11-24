@@ -14,10 +14,7 @@
     
           <v-spacer></v-spacer>
     
-          <v-form
-            @keyup.enter="search"
-            v-model="inputData"
-            >
+          <v-form @submit.prevent="search">
       <v-container>
         <v-row>         
           <v-col
@@ -26,6 +23,7 @@
             md="12"
           >
             <v-text-field
+              v-model="inputData"
               label="검색"
               append-icon="mdi-magnify"
             ></v-text-field>
@@ -91,7 +89,11 @@ export default {
       this.$store.dispatch('getMovieList')
     },
     search() {
+      // console.log(this.inputData)
+      // this.inputData = this.inputData
+      this.$store.dispatch('searchMovies', this.inputData)
       this.$router.push({name: 'search', params: {keyWord: this.inputData}})
+      this.inputData = null
     },
   }
 }
