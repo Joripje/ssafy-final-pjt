@@ -29,8 +29,13 @@ def movie_detail(request, movie_pk):
         movie.vote_average = movie_info['movie']['vote_average']
         movie.overview = movie_info['movie']['overview']
         movie.save()
+
+        movie = Movie.objects.get(pk=movie_pk)
         
-    movie = Movie.objects.get(pk=movie_pk)
+        for genre in movie_info['movie']['genres']:
+            print(genre)
+            movie.genres.add(genre['id'])
+        
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
 
