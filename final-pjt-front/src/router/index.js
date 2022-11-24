@@ -22,7 +22,7 @@ const routes = [
     component: ProfileView
   },
   {
-    path: '/Search',
+    path: '/Search/:keyWord',
     name: 'search',
     component: SearchView
   },

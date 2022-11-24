@@ -324,7 +324,20 @@ export default new Vuex.Store({
       }
       
     },
-    
+    searchMovies(context, keyWord) {
+      axios({
+        method: 'get',
+        url: `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=ko-KR&query=${keyWord}&page=1&include_adult=false&region=KR`,
+      })
+        .then(res => {
+          context.commit('GET_MOVIE_LIST', res.data.results)
+          console.log(res.data.results)
+        })
+        .catch(err => {
+          console.log(err)
+          console.log(TMDB_API_KEY)
+        })
+    }
 
   },
   modules: {

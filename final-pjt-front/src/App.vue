@@ -14,9 +14,29 @@
     
           <v-spacer></v-spacer>
     
-          <v-btn icon @click="$router.push('/search')">
+          <v-form
+            @keyup.enter="search"
+            v-model="inputData"
+            >
+      <v-container>
+        <v-row>         
+          <v-col
+            cols="12"
+            sm="12"
+            md="12"
+          >
+            <v-text-field
+              label="검색"
+              append-icon="mdi-magnify"
+            ></v-text-field>
+ 
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
+          <!-- <v-btn icon @click="$router.push('/search')">
             <v-icon>mdi-magnify</v-icon>
-          </v-btn>
+          </v-btn> -->
     
           <v-btn icon @click="$router.push('/')">
             <v-icon>mdi-home</v-icon>
@@ -50,6 +70,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      inputData: null
+    }
+  },
   computed: {
     isLoggedIn() {
       return this.$store.getters.isLoggedIn
@@ -64,7 +89,10 @@ export default {
     },
     getMovieList() {
       this.$store.dispatch('getMovieList')
-    }
+    },
+    search() {
+      this.$router.push({name: 'search', params: {keyWord: this.inputData}})
+    },
   }
 }
 </script>
