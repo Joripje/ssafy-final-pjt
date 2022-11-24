@@ -5,7 +5,7 @@ import createPersistedState from 'vuex-persistedstate'
 
 const API_URL = 'http://127.0.0.1:8000'
 Vue.use(Vuex)
-const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
+const TMDB_API_KEY="c77ef5df652e2127c8855d6cae700acb"
 export default new Vuex.Store({
   plugins: [
     createPersistedState(),

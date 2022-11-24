@@ -35,7 +35,7 @@
     <v-divider class="mx-4"></v-divider>
 
     <v-card-title>{{ review.content }}</v-card-title>
-    <div align="right" class="grey--text ms-4"> {{review.movie}}&nbsp;</div>
+    <div align="right" class="grey--text ms-4"> {{review.movie.title}}&nbsp;</div>
 
   </v-card>
 </template>

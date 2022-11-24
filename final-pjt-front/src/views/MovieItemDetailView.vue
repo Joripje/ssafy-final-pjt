@@ -79,7 +79,7 @@
                 <v-card-text>
                   <div class="text-center mt-0">
                     <v-rating
-                      v-model="review_rating"
+                      v-model="review_rate"
                       color="yellow darken-3"
                       background-color="grey"
                       empty-icon="$ratingFull"
@@ -139,7 +139,7 @@ export default {
   data() {
     return {
       review_content: null,
-      review_rating: null,
+      review_rate: null,
     }
   },
   components: {
@@ -147,9 +147,6 @@ export default {
     ActorList,
   },
   computed: {
-    review_rate() {
-      return this.review_rating * 2
-    },
     movieItemDetail() {
       return this.$store.state.movieItemDetail
     },
@@ -203,7 +200,7 @@ export default {
       }
       this.$store.dispatch('createReview', payload)
       this.review_content = null
-      this.review_rating = null
+      this.review_rate = null
     },
     getMovieReview() {
       this.$store.dispatch('getMovieReview', this.$route.params.movieId)
