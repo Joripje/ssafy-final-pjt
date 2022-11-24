@@ -72,7 +72,8 @@ export default {
     movieImage() {
       // return 'https://image.tmdb.org/t/p/original' + this.$store.state.user_review[0].movie.backdrop_path
       // } else {
-        return 'https://image.tmdb.org/t/p/original/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg'
+        return this.$store.state.movie_image
+        // 
         }
     
   },

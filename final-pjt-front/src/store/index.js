@@ -37,6 +37,7 @@ export default new Vuex.Store({
 
     ],
     user_review: [{movie:{backdrop_path: '/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg'}}],
+    movie_image: 'https://image.tmdb.org/t/p/original/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg',
   },
   getters: {
     isLoggedIn(state) {
@@ -80,7 +81,10 @@ export default new Vuex.Store({
     },
     GET_USER_REVIEW(state, review_movie) {
       state.user_review = review_movie
-    }
+    },
+    'GET_MOVIE_IAMGE'(state, movie_image) {
+      state.movie_image = 'https://image.tmdb.org/t/p/original' + movie_image
+    },
   },
   actions: {
     getMovieDetail(context, movieId) {
@@ -336,7 +340,28 @@ export default new Vuex.Store({
           console.log(err)
           console.log(TMDB_API_KEY)
         })
-    }
+    },
+    getMovieImage(context) {
+      if (this.state.token) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/accounts/profile/image/`,
+          headers: {
+            Authorization: `Token ${this.state.token}`
+          }
+        })
+          .then(res => {
+            res.data
+            context.commit('GET_MOVIE_IAMGE', res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        console.log('없음')
+      }
+      
+    },
 
   },
   modules: {

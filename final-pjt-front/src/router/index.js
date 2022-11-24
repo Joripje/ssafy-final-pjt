@@ -19,7 +19,11 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: ProfileView
+    component: ProfileView,
+    beforeEnter(to, from, next) {
+      store.dispatch('getMovieImage')
+      next()
+    }
   },
   {
     path: '/Search/:keyWord',
