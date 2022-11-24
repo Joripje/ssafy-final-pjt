@@ -61,7 +61,5 @@ def new_movie(pk):
             data.append(actor_dict)
             
         movie_dict['actors'] = data
-
-    print(movie_dict)
-
-new_movie(11)
+    print(movie_dict['actors'])
+    return movie_dict
