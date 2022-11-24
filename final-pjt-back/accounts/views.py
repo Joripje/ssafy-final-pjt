@@ -72,6 +72,29 @@ def genre_prefer(request):
         10752: 0,
         10770: 0,
     }
+
+    prefer_color = {
+        1: '#c94c44',
+        2: '#886b68',
+        3: '#60b2a0',
+        4: '#cfa146',
+        5: '#212121',
+        6: '#00796b',
+        7: '#e040fb',
+        8: '#795548',
+        9: '#388e3c',
+        10: '#f8bbd0',
+        11: '#00BCD4',
+        12: '#CDDC39',
+        13: '#BDBDBD',
+        14: '#7C4DFF',
+        15: '#800020',
+        16: '#ffe4e1',
+        17: '#e1fcff',
+        18: '#00616b',
+        19: '#0a006b',
+    }
+
     user = request.user
 
     serializer = PreferGenreSerializer(user)
@@ -85,7 +108,6 @@ def genre_prefer(request):
         for gen in genre_list:
             prefer_dict[gen] += 1
              
-    print(prefer_dict)
 
     val = set()
     for key, value in prefer_dict.items():
@@ -93,18 +115,27 @@ def genre_prefer(request):
 
     val = sorted(val, reverse=True)
     
-    user_prefer_genre = []
-    
+    user_prefer_genre = {}
+    label = []
+    color = []
+    scale =[]
+
     for v in val:
         for key, value in prefer_dict.items():
             
             if value == v and v:
-                user_prefer_genre.append({genre_dict[key] : value})
+                label.append(genre_dict[key])
+                color.append(prefer_color[len(label)])
+                scale.append(value)
                 
         if len(user_prefer_genre) >= 3:
             break
+    user_prefer_genre['label'] = label
+    user_prefer_genre['color'] = color
+    user_prefer_genre['scale'] = scale
 
     print(user_prefer_genre)
+
     return Response(user_prefer_genre)
 
 # 장르기반 추천

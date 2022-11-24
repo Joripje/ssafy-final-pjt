@@ -33,6 +33,9 @@ export default new Vuex.Store({
     recommend_movie_list: [
 
     ],
+    prefer_list : [
+
+    ],
   },
   getters: {
     isLoggedIn(state) {
@@ -70,6 +73,9 @@ export default new Vuex.Store({
     },
     GET_RECOMMEND_LIST(state, movie_list) {
       state.recommend_movie_list = movie_list
+    },
+    GET_PREFER_LIST(state, prefer_list) {
+      state.prefer_list = prefer_list
     }
   },
   actions: {
@@ -267,7 +273,30 @@ export default new Vuex.Store({
         console.log('없음')
       }
       
-    }
+    },
+    getPreferList(context) {
+      if (this.state.token) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/accounts/genre_prefer/`,
+          headers: {
+            Authorization: `Token ${this.state.token}`
+          }
+        })
+          .then(res => {
+            res.data
+            context.commit('GET_PREFER_LIST', res.data)
+            console.log(res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        console.log('없음')
+      }
+      
+    },
+    
 
   },
   modules: {
