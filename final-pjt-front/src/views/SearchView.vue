@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>검색화면 입니다</h1>
+    <h1 style="color: white;">검색화면 입니다</h1>
     <MovieList/>
   </div>
 </template>

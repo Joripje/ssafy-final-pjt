@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>맞춤 추천 영화</h1>
+    <h1 style="color: white; float: left;">맞춤 추천 영화</h1>
     <RecommendMovieList/>
   </div>
 </template>
