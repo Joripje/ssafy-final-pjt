@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 40px">
     <TrendingMovie style="height: 400pt"/>
     <RecommendMovie v-if="isLoggedIn === true" style="height: 200pt"/>
     

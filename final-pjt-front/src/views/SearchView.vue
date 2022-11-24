@@ -1,7 +1,9 @@
 <template>
   <div>
+
     <h1>검색화면 입니다</h1>
     <SearchList/>
+
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>최근 인기 영화</h1>
+      <h1 style="color: white; float: left;">최근 인기 영화</h1>
     <MovieList/>
   </div>
 </template>

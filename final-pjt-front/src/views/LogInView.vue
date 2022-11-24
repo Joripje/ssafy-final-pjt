@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-  <v-app id="inspire">
+  <v-app id="inspire" style="height: 300px;">
     <v-card
       class="mx-auto"
-      max-width="500"
+      width="400"
     >
       <v-card-title class="text-h6 font-weight-regular justify-space-between">
         <span>{{ currentTitle }}</span>
@@ -72,6 +72,16 @@
       </v-card-actions>
     </v-card>
   </v-app>
+  <v-app id="inspire">
+    <v-btn
+          color="primary"
+          depressed
+          @click="$router.push('/signup')"
+        >
+          회원가입
+        </v-btn>
+  </v-app>
+  
 </div>
 
 </template>
