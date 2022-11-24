@@ -3,7 +3,7 @@
   <v-app id="inspire">
     <v-card
       class="mx-auto"
-      max-width="500"
+      width="400"
     >
       <v-card-title class="text-h6 font-weight-regular justify-space-between">
         <span>{{ currentTitle }}</span>
