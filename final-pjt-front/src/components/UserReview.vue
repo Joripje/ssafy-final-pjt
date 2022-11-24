@@ -1,9 +1,6 @@
 <template>
   <div class="col-8">
     <v-expansion-panels
-      
-      v-model="panel"
-      :readonly="readonly"
       multiple
     >
     <v-expansion-panel>
