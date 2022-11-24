@@ -50,6 +50,22 @@
             </div>
           </v-expand-transition>
         </v-img>
+        <v-card-text
+          class="pt-6"
+          style="position: relative;"
+        >
+          <v-btn @click="addToWishList"
+            absolute
+            color="red"
+            class="white--text"
+            fab
+            right
+            top
+          >
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
+          
+        </v-card-text>
         
       </v-card>
     </v-hover>
@@ -81,8 +97,10 @@ export default {
   },
   methods: {
     goToDetail() {
-      
       this.$router.push({ name: 'movieitemdetail', params: { movieId: this.movie.id } })
+    },
+    addToWishList() {
+      this.$store.dispatch('addToWishList', this.movie.id)
     },
   }
 }

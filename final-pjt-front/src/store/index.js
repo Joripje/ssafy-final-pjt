@@ -125,6 +125,7 @@ export default new Vuex.Store({
       })
         .then(res => {
           console.log(res)
+          router.push({ name: 'watchlater'})
         })
         .catch(err => console.log(err))
     },
@@ -142,7 +143,7 @@ export default new Vuex.Store({
       })
         .then(res => {
           console.log(res)
-          router.push({ name: 'home'})
+          router.push({ name: '/wishlist'})
         })
         .catch((err) => {
           alert('회원정보를 확인해주세요')
@@ -220,9 +221,6 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/movies/${movieId}/review/`,
-        // headers: {
-        //   Authorization: `Token ${this.state.token}`
-        // }
       })
         .then(res => {
           context.commit('GET_MOVIE_REVIEW', res.data.movie_review)
@@ -236,9 +234,6 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=ko-KR&page=1&region=KR`,
-        // headers: {
-        //   Authorization: `Token ${this.state.token}`
-        // }
       })
         .then(res => {
           context.commit('GET_MOVIE_LIST', res.data.results)
