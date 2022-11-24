@@ -204,7 +204,7 @@ export default new Vuex.Store({
       })
         .then(res => {
           console.log(res)
-
+          context.dispatch('getMovieReview', movieId)
         })
         .catch(err => {
           console.log(err)

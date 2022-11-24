@@ -1,10 +1,3 @@
-
-  <!-- <div>
-    <button v-if="review.user === userInfo.username" @click="deleteReview">리뷰삭제</button>
-    <h1> {{ review.content }}</h1>
-    <h1> {{ review.rate }}</h1>
-    <hr>
-  </div> -->
 <template>
   <v-card
     class="mx-5 my-12"
@@ -24,22 +17,24 @@
           readonly
           size="14"
         ></v-rating>
+        <v-btn @click="deleteReview" v-if="review.user === userInfo.username"
+          absolute
+          color="red"
+          class="white--text"
+          fab
+          right
+          center
+        >
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
 
         <div class="grey--text ms-4">
           {{ review.user }}
         </div>
       </v-row>
-      <div></div>
     </v-card-text>
-
     <v-divider class="mx-4"></v-divider>
-
     <v-card-title>{{ review.content }}</v-card-title>
-
- 
-     
-
-
   </v-card>
 </template>
 <script>
@@ -51,13 +46,6 @@ export default {
   props: {
     review: Object,
   },
-  // data() {
-  //   return {
-  //     content: null,
-  //     rate: null,
-      
-  //   }
-  // },
   computed: {
     userInfo() {
       return this.$store.state.user_info
