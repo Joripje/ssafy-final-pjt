@@ -1,49 +1,45 @@
 <template>
   <div>
-    <horizontal-scroll class="horizontal-scroll" style="overflow-x:hidden">
+    <Flicking :options="{ align: 'prev', circular: true, bound: false, duration: 500, moveType: ['strict', { count: 5 }]}" :plugins="plugins">
       <MovieListItem
         v-for="(movie, index) in movies"
         :key="index"
         :movie="movie"
       />
-    </horizontal-scroll>
-    <Flicking :options="{ circular: true }">
-      <div style="width: 120px;">1</div>
-      <div style="width: 20%;">2</div>
-      <div style="width: 500px;">3</div>
-      <div style="width: 300px;">4</div>
-      <div style="width: 100%;">5</div>
     </Flicking>
+    <span class="flicking-arrow-prev is-outside"></span>
+    <span class="flicking-arrow-next is-outside"></span>
+
   </div>
 </template>
 
 <script>
 import MovieListItem from '@/components/MovieListItem.vue'
-import HorizontalScroll from 'vue-horizontal-scroll'
-import 'vue-horizontal-scroll/dist/vue-horizontal-scroll.css'
-import Flicking from "@egjs/vue-flicking";
+import { Flicking } from "@egjs/vue-flicking"
+import "@egjs/flicking-plugins/dist/arrow.css"
+import { AutoPlay, Arrow } from "@egjs/flicking-plugins"
+
+const plugins = [new AutoPlay({ duration: 2500, direction: "NEXT", stopOnHover: true, delayAfterHover:500}), new Arrow(({ parentEl: document.body }))];
 
 export default {
   name: 'MovieList',
   components: {
     MovieListItem,
-    HorizontalScroll,
-    Flicking,
+    Flicking: Flicking,
   },
   computed: {
     movies() {
       return this.$store.state.movie_list
+    }
+  },
+  data() {
+    return {
+      plugins
     }
   }
 }
 </script>
 
 <style>
-.horizontal-scroll {
-    display: flex;
-    width: 100%;
-    height: 350pt;
-    margin: 10pt;
-    border: none;
-}
+
 </style>

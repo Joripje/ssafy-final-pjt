@@ -1,40 +1,45 @@
 <template>
   <div>
-    <horizontal-scroll class="horizontal-scroll" style="overflow-x:hidden">
+    <Flicking :options="{ align: 'prev', circular: true, bound: false, duration: 800, moveType: ['strict', { count: 5 }]}" :plugins="plugins">
       <RecommendMovieListItem
         v-for="(movie, index) in movies"
         :key="index"
         :movie="movie"
       />
-    </horizontal-scroll>
+    </Flicking>
+    <span class="flicking-arrow-prev is-outside"></span>
+    <span class="flicking-arrow-next is-outside"></span>
+
   </div>
 </template>
 
 <script>
 import RecommendMovieListItem from '@/components/RecommendMovieListItem.vue'
-import HorizontalScroll from 'vue-horizontal-scroll'
-import 'vue-horizontal-scroll/dist/vue-horizontal-scroll.css'
+import { Flicking } from "@egjs/vue-flicking"
+import "@egjs/flicking-plugins/dist/arrow.css"
+import { AutoPlay, Arrow } from "@egjs/flicking-plugins"
+
+const plugins = [new AutoPlay({ duration: 5000, direction: "NEXT", stopOnHover: true, delayAfterHover:5000}), new Arrow(({ parentEl: document.body }))];
 
 export default {
-  name: 'RecommendMovieList',
+  name: 'MovieList',
   components: {
     RecommendMovieListItem,
-    HorizontalScroll,
+    Flicking: Flicking,
   },
   computed: {
     movies() {
       return this.$store.state.recommend_movie_list
+    }
+  },
+  data() {
+    return {
+      plugins
     }
   }
 }
 </script>
 
 <style>
-.horizontal-scroll {
-    display: flex;
-    width: 100%;
-    height: 350pt;
-    margin: 10pt;
-    border: none;
-}
+
 </style>
