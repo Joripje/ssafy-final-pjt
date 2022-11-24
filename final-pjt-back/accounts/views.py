@@ -285,5 +285,7 @@ def recommend(request):
         movie = Movie.objects.get(pk=id)
         serializer = RecommendSerializer(movie)
         recommend_list.append(serializer.data)
+        if len(recommend_list) == 20:
+            break
 
     return Response(recommend_list)
