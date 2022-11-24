@@ -36,7 +36,7 @@ export default new Vuex.Store({
     prefer_list : [
 
     ],
-    user_review: null,
+    user_review: [{movie:{backdrop_path: '/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg'}}],
   },
   getters: {
     isLoggedIn(state) {

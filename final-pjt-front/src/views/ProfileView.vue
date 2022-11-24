@@ -3,7 +3,7 @@
     <v-container class="col-6 mx-auto">
     <v-row justify="space-around">
       <v-card width="100%">
-        <v-img class='my-0'
+        <v-img v-if='userReviewEx' class='my-0'
           height="350px"
           :src="movieImage"
           gradient="to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, .4)"
@@ -66,10 +66,13 @@ export default {
     userInfo() {
       return this.$store.state.user_info
     },
+    userReviewEx() {
+      return this.$store.state.user_review
+    },
     movieImage() {
-      return 'https://image.tmdb.org/t/p/original' + this.$store.state.user_review[0].movie.backdrop_path
+      // return 'https://image.tmdb.org/t/p/original' + this.$store.state.user_review[0].movie.backdrop_path
       // } else {
-      //   return 'https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg'
+        return 'https://image.tmdb.org/t/p/original/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg'
         }
     
   },
